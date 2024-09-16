@@ -10,6 +10,7 @@ website:
         text: Home
       - about.qmd
       - project.qmd
+      - Quarto Presentation.qmd
     
     tools:
       - icon: trash
@@ -27,7 +28,7 @@ website:
 
 format:
   html:
-    theme: zephyr  # flatly, litera, lumen, lux, minty, pulse, sandstone, *zephyr, quartz, yeti, cosmo, sketchy
+    theme: zephyr  # flatly, litera, lumen, lux, minty, pulse, sandstone, zephyr, quartz, yeti, cosmo, sketchy
     css: styles.css
     toc: true
 

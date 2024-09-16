@@ -1,0 +1,21 @@
+---
+title: "Quarto Presentation"
+author: "Coby Darer"
+format: revealjs 
+code-fold: true
+editor: visual
+---
+
+# Problem #1
+```{r}
+
+```
+
+# Problem #2
+```{r}
+
+```
+# Problem #3
+```{r}
+
+```
