@@ -5,17 +5,32 @@ format: revealjs
 code-fold: true
 editor: visual
 ---
-
-# Problem #1
 ```{r}
+library(tidyverse)
+library(tidybiology)
+data(happy)
+data(happy_join_one)
+data(happy_full)
+```
+# Problem #1
 
+```{r}
+glimpse(happy)
+glimpse(happy_join_one)
+glimpse(happy_full)
 ```
 
 # Problem #2
 ```{r}
-
+bind_rows(happy, happy_join_one)
 ```
 # Problem #3
 ```{r}
+nrow(happy) == nrow(happy_join_one)
+bind_cols(happy, happy_join_one)
+```
 
+```{r}
+happy_full %>%
+  filter(!country_name %in% happy$country_name)
 ```
