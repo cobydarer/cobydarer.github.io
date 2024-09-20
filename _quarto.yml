@@ -10,7 +10,6 @@ website:
         text: Home
       - about.qmd
       - project.qmd
-      - Quarto Presentation.qmd
     
     tools:
       - icon: trash
