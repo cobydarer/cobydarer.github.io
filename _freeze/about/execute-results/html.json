@@ -1,10 +1,8 @@
 {
-  "hash": "f0606a02f61740b36561a7f80112aa37",
+  "hash": "4a692bb2fab5d699f9ff210f3a2138f2",
   "result": {
-    "markdown": "---\ntitle: \"About Me\"\n---\n\n\nThis is where you get to write about yourself.\n\n\n\n::: {.cell}\n\n:::\n",
-    "supporting": [
-      "about_files"
-    ],
+    "markdown": "---\ntitle: \"About Me\"\n---\n\n![](./Pics/Beach_pic.jpg){width=400}\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

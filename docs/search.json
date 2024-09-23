@@ -7,17 +7,17 @@
     "text": "This is the main landing page!\n\nTo learn more about geezers.\nTo learn more about Quarto websites."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Me",
-    "section": "",
-    "text": "This is where you get to write about yourself."
-  },
-  {
     "objectID": "project.html",
     "href": "project.html",
     "title": "Projects",
     "section": "",
-    "text": "Project 1\nProject 2\nProject 3\nProject 4"
+    "text": "Quarto Presentation\nProject 2\nProject 3\nProject 4"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "me"
   }
 ]
