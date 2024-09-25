@@ -6,6 +6,7 @@ code-fold: true
 editor: visual
 ---
 ```{r}
+    
 library(tidyverse)
 library(tidybiology)
 data(happy)
@@ -15,6 +16,7 @@ data(happy_full)
 # Explore Data with glimpse
 
 ```{r}
+#| echo: true
 glimpse(happy)
 glimpse(happy_join_one)
 glimpse(happy_full)
@@ -22,15 +24,21 @@ glimpse(happy_full)
 
 # Combining Rows
 ```{r}
+#| echo: true
 bind_rows(happy, happy_join_one)
 ```
 # Combining Columns and Filtering
 ```{r}
 nrow(happy) == nrow(happy_join_one)
+```
+
+```{r}
+#| echo: true
 bind_cols(happy, happy_join_one)
 ```
 
 ```{r}
+#| echo: true
 happy_full %>%
   filter(!country_name %in% happy$country_name)
 ```
