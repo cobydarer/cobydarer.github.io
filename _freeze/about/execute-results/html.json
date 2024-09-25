@@ -1,7 +1,7 @@
 {
-  "hash": "4a692bb2fab5d699f9ff210f3a2138f2",
+  "hash": "7f99c9ea2c39ff7adeb271e2ed86e1dd",
   "result": {
-    "markdown": "---\ntitle: \"About Me\"\n---\n\n![](./Pics/Beach_pic.jpg){width=400}\n\n\n\n::: {.cell}\n\n:::\n",
+    "markdown": "---\ntitle: \"About Me\"\n---\n\n![](./Pics/Beach_pic.jpg){width=300}\n\n\n\n::: {.cell}\n\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

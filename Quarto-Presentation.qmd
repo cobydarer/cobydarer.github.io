@@ -1,5 +1,5 @@
 ---
-title: "Quarto Presentation"
+title: "Combining Data Frames"
 author: "Coby Darer"
 format: revealjs 
 code-fold: true
@@ -20,11 +20,11 @@ glimpse(happy_join_one)
 glimpse(happy_full)
 ```
 
-# Problem #2
+# Combining Rows
 ```{r}
 bind_rows(happy, happy_join_one)
 ```
-# Problem #3
+# Combining Columns and Filtering
 ```{r}
 nrow(happy) == nrow(happy_join_one)
 bind_cols(happy, happy_join_one)

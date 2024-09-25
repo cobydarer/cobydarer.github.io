@@ -2,22 +2,15 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Quarto Web Demo",
+    "title": "Coby Darer",
     "section": "",
-    "text": "This is the main landing page!\n\nTo learn more about geezers.\nTo learn more about Quarto websites."
+    "text": "Explore this webpage to learn more about me and what projects I have completed"
   },
   {
     "objectID": "project.html",
     "href": "project.html",
     "title": "Projects",
     "section": "",
-    "text": "Quarto Presentation\nProject 2\nProject 3\nProject 4"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Me",
-    "section": "",
-    "text": "me"
+    "text": "Combining Data Frames\nProject 2\nProject 3\nProject 4"
   }
 ]
