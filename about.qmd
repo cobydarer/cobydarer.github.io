@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 ---
-![](./Pics/Beach_pic.jpg){width=300}
+![](./Pics/Beach_pic.jpg){width=300} ![](./Pics/SSK0087.JPEG){width=267}
 
 
 ```{r}
