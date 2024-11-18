@@ -1,8 +1,10 @@
 {
-  "hash": "ac5bd0dbc1d7789fcceac496fc03c451",
+  "hash": "6a9885c01c933a84cd9f23e948328ffb",
   "result": {
-    "markdown": "---\ntitle: \"About Me\"\n---\n\n![](./Pics/Beach_pic.jpg){width=300} ![](./Pics/SSK0087.JPEG){width=267}\n\n\n\n::: {.cell}\n\n:::\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"About Me\"\n---\n\n\n![](./Pics/Beach_pic.jpg){width=\"300\"} ![](./Pics/SSK0087.JPEG){width=\"267\"}\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "about_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
