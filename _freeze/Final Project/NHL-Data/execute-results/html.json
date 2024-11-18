@@ -1,0 +1,16 @@
+{
+  "hash": "587337b59ab081603492a9d70e18acc3",
+  "result": {
+    "markdown": "---\ntitle: \"Analyzing NHL Data from 2007-2008 to 2018-2019\"\nformat: \n  html:\n    theme: cosmo  # zephyr pulse, sketchy, default, cosmo, vapor etc\nauthor:\n  - name: Coby Darer\n    email: darerjf@appstate.edu\n    affiliation:\n      - name: Appalachian State University\n        city: Boone\n        state: NC  \n        url: https://www.appstate.edu/\nabstract: >\n  This project will explore data on NHL teams and players from the 2007-2008 season to the 2018-2019 season.\n---\n\n## Loading the Necessary Packages\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(nhldata)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(tidyr)\nlibrary(ggplot2)\n```\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nteams %>%\n  ggplot(aes(x = season, y = gf, color = team)) + \n  geom_line()\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n`geom_line()`: Each group consists of only one observation.\nℹ Do you need to adjust the group aesthetic?\n```\n:::\n\n::: {.cell-output-display}\n![](NHL-Data_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "NHL-Data_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

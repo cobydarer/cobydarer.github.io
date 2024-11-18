@@ -5,6 +5,7 @@ format: revealjs
 code-fold: true
 editor: visual
 ---
+
 ```{r}
     
 library(tidyverse)
@@ -13,6 +14,7 @@ data(happy)
 data(happy_join_one)
 data(happy_full)
 ```
+
 # Explore Data with glimpse
 
 ```{r}
@@ -23,11 +25,14 @@ glimpse(happy_full)
 ```
 
 # Combining Rows
+
 ```{r}
 #| echo: true
 bind_rows(happy, happy_join_one)
 ```
+
 # Combining Columns and Filtering
+
 ```{r}
 nrow(happy) == nrow(happy_join_one)
 ```
