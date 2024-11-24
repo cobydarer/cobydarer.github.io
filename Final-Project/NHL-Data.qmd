@@ -1,0 +1,69 @@
+---
+title: "Analyzing NHL Data from 2007-2008 to 2018-2019"
+format: 
+  html:
+    theme: cosmo  # zephyr pulse, sketchy, default, cosmo, vapor etc
+author:
+  - name: Coby Darer
+    email: darerjf@appstate.edu
+    affiliation:
+      - name: Appalachian State University
+        city: Boone
+        state: NC  
+        url: https://www.appstate.edu/
+abstract: >
+  This project will explore data on NHL teams and players from the 2007-2008 season to the 2018-2019 season.
+---
+## Loading the Necessary Packages
+```{r}
+#| message: false
+library(nhldata)
+library(dplyr)
+library(lubridate)
+library(tidyr)
+library(ggplot2)
+```
+
+```{r}
+glimpse(teams)
+```
+
+```{r}
+#| code-fold: true
+West_conf <- teams %>%
+  filter(team %in% c("ANA", "ARI", "CGY", "CHI", "COL", "DAL", "EDM", "LA", "MIN", "NSH", "SJ", "STL", "VAN"))
+
+East_conf <- teams %>%
+  filter(team %in% c("BOS", "BUF", "CAR", "CBJ", "DET", "FLA", "MTL", "NJ", "NYI", "NYR", "OTT", "PHI", "PIT", "TB", "TOR", "WSH"))
+
+Atlantic_div <- East_conf %>%
+  filter(team %in% c("BOS", "BUF", "DET", "FLA", "MTL", "OTT", "TB", "TOR"))
+
+Metro_div <- East_conf %>%
+  filter(team %in% c("CAR", "CBJ", "NJ", "NYI", "NYR", "PHI", "PIT", "WSH"))
+
+Central_div <- West_conf %>%
+  filter(team %in% c("ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL"))
+
+Pacific_div <- West_conf %>%
+  filter(team %in% c("ANA", "CGY", "EDM", "LA", "SJ", "VAN"))
+
+```
+
+```{r}
+Central_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = gf, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth() + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+teams %>%
+  ggplot(aes(x = season, y = gf, color = team)) + 
+    geom_point()
+```
+
