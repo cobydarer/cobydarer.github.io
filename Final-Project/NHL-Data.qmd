@@ -12,7 +12,7 @@ author:
         state: NC  
         url: https://www.appstate.edu/
 abstract: >
-  This project will explore data on NHL teams and players from the 2007-2008 season to the 2018-2019 season.
+  This project will explore 5 v 5 data on NHL teams and players from the 2007-2008 season to the 2018-2019 season.
 ---
 ## Loading the Necessary Packages
 ```{r}
@@ -22,6 +22,37 @@ library(dplyr)
 library(lubridate)
 library(tidyr)
 library(ggplot2)
+```
+## Exploring the data on skaters
+```{r}
+glimpse(skaters)
+```
+
+```{r}
+#| code-fold: true
+skaters %>%
+  filter(p >= 50) %>%
+  ggplot(aes(x = season)) +
+    geom_bar(color = "black", fill = "lightblue") +
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r}
+#| code-fold: true
+skaters %>%
+  filter(ish_pct >= 20) %>%
+  ggplot(aes(x = season)) +
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90))
+
+skaters %>%
+  filter(ish_pct >= 10) %>%
+  ggplot(aes(x = season)) +
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90))
 ```
 
 ```{r}
@@ -51,19 +82,57 @@ Pacific_div <- West_conf %>%
 ```
 
 ```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
 Central_div %>%
   filter(season != "2012-2013") %>%
   ggplot(aes(x = season, y = gf, color = team)) + 
     geom_point() +
     geom_line(aes(group = team)) +
-    geom_smooth() + 
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+
+Pacific_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = gf, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+
+Atlantic_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = gf, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+
+Metro_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = gf, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90))
 ```
 
 ```{r}
-teams %>%
-  ggplot(aes(x = season, y = gf, color = team)) + 
-    geom_point()
+glimpse(goalies)
+```
+
+```{r}
+goalies %>%
+  filter(sv_pct >= 91.00) %>%
+  filter(gp >= 45) %>%
+  ggplot(aes(x = season)) + 
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90))
 ```
 
