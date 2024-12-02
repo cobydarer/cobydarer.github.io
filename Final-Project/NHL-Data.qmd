@@ -23,7 +23,7 @@ library(lubridate)
 library(tidyr)
 library(ggplot2)
 ```
-## Exploring the data on skaters
+## Exploring some data on skaters
 ```{r}
 glimpse(skaters)
 ```
@@ -54,7 +54,7 @@ skaters %>%
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 90))
 ```
-
+## Exploring some data on each team
 ```{r}
 glimpse(teams)
 ```
@@ -121,7 +121,7 @@ Metro_div %>%
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90))
 ```
-
+## Exploring some data on goalies
 ```{r}
 glimpse(goalies)
 ```
