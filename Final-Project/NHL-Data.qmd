@@ -237,7 +237,7 @@ There are 48 variables in the skaters data set:
 
 34.    `ipent`: Individual penalties taken
 
-35.    `ipend`: Individual penalties drawn
+35.    `ipend`: Individual penalties drawnr
 
 36.    `ip_plumin`: Individual penalties taken - individual penalties drawn
 
