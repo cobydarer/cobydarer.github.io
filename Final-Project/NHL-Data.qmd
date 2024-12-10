@@ -23,11 +23,14 @@ library(lubridate)
 library(tidyr)
 library(ggplot2)
 ```
+## Introduction
+
+This project will explore some of the 5v5 data on NHL teams from the 2007-2008 season to the 2018-2019 season. Specifically 5v5 scoring over these years. It will look at data on skaters, goalies and teams as a whole. The division alignment has changed within this time frame so the teams will be split up into their current divisions (This is for readability more than comparing separate divisions). 
 
 ```{r}
 #| code-fold: true
 West_conf <- teams %>%
-  filter(team %in% c("ANA", "ARI", "CGY", "CHI", "COL", "DAL", "EDM", "LA", "MIN", "NSH", "SJ", "STL", "VAN", "ATL", "WPG"))
+  filter(team %in% c("ANA", "ARI", "CGY", "CHI", "COL", "DAL", "EDM", "LA", "MIN", "NSH", "SJ", "STL", "VAN", "ATL", "WPG", "VGK"))
 
 East_conf <- teams %>%
   filter(team %in% c("BOS", "BUF", "CAR", "CBJ", "DET", "FLA", "MTL", "NJ", "NYI", "NYR", "OTT", "PHI", "PIT", "TB", "TOR", "WSH"))
@@ -42,7 +45,7 @@ Central_div <- West_conf %>%
   filter(team %in% c("ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "ATL", "WPG"))
 
 Pacific_div <- West_conf %>%
-  filter(team %in% c("ANA", "CGY", "EDM", "LA", "SJ", "VAN"))
+  filter(team %in% c("ANA", "CGY", "EDM", "LA", "SJ", "VAN", "VGK"))
 
 ```
 
@@ -53,6 +56,8 @@ glimpse(teams)
 ```
 
 There are 28 variables in the teams data set:
+
+Note: Corsi stat in hockey is Shot attempts
 
 1.    `team`: Team name
 
@@ -110,6 +115,8 @@ There are 28 variables in the teams data set:
 
 28.    `pdo`: Just Win Baby
 
+
+Since we are exploring 5v5, let's see how important it is by looking at each teams goals for.
 ```{r}
 #| code-fold: true
 #| warning: false
@@ -160,6 +167,7 @@ Metro_div %>%
     labs(x = "Season",
          y = "Goals For")
 ```
+So it looks like there was some fluctuation, but on average teams are scoring slightly more on 5v5 now than they used to.
 
 ## Exploring some data on `skaters`
 
@@ -168,6 +176,8 @@ glimpse(skaters)
 ```
 
 There are 48 variables in the skaters data set:
+
+Note: Corsi stat in hockey is Shot attempts
 
 1.    `player`: Player name
 
@@ -237,7 +247,7 @@ There are 48 variables in the skaters data set:
 
 34.    `ipent`: Individual penalties taken
 
-35.    `ipend`: Individual penalties drawnr
+35.    `ipend`: Individual penalties drawn
 
 36.    `ip_plumin`: Individual penalties taken - individual penalties drawn
 
@@ -265,6 +275,7 @@ There are 48 variables in the skaters data set:
 
 48.    `cf_pct_qoc`: Corsi for percentage weighted by quality of player's opponents
 
+It would be nice to see if the individual player stats reflect this slight increase in production.
 ```{r}
 #| code-fold: true
 #| label: fig-5
@@ -283,7 +294,7 @@ skaters %>%
 ```{r}
 #| code-fold: true
 #| label: fig-6
-#| fig-cap: "Number of players with atleast 20% shooting percentage"
+#| fig-cap: "Number of players with at least 20% shooting percentage"
 skaters %>%
   filter(season != "2012-2013") %>%
   filter(ish_pct >= 20) %>%
@@ -298,7 +309,7 @@ skaters %>%
 ```{r}
 #| code-fold: true
 #| label: fig-7
-#| fig-cap: "Number of players with atleast 10% shooting percentage"
+#| fig-cap: "Number of players with at least 10% shooting percentage"
 
 skaters %>%
   filter(season != "2012-2013") %>%
@@ -311,6 +322,7 @@ skaters %>%
          y = "Count")
 ```
 
+Interesting, the amount of players with at least 50 points seems to be trending up in the last couple of years but is not more than some of the years in the past. Also shooting percentage has stayed relatively consistent, but at 20% there were some spikes.
 
 ## Exploring some data on `goalies`
 
@@ -371,7 +383,7 @@ goalies %>%
 ```{r}
 #| code-fold: true
 #| label: fig-9
-#| fig-cap: "Number of who faced"
+#| fig-cap: "Number of who goalies faced an average of at least 20 shots a game"
 goalies <- goalies %>%
   mutate(avg_sa_gp = sa/gp)
 

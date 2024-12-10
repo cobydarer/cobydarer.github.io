@@ -147,6 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#loading-the-necessary-packages" id="toc-loading-the-necessary-packages" class="nav-link active" data-scroll-target="#loading-the-necessary-packages">Loading the Necessary Packages</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#exploring-some-data-teams" id="toc-exploring-some-data-teams" class="nav-link" data-scroll-target="#exploring-some-data-teams">Exploring some data <code>teams</code></a></li>
   <li><a href="#exploring-some-data-on-skaters" id="toc-exploring-some-data-on-skaters" class="nav-link" data-scroll-target="#exploring-some-data-on-skaters">Exploring some data on <code>skaters</code></a></li>
   <li><a href="#exploring-some-data-on-goalies" id="toc-exploring-some-data-on-goalies" class="nav-link" data-scroll-target="#exploring-some-data-on-goalies">Exploring some data on <code>goalies</code></a></li>
@@ -204,11 +205,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This project will explore some of the 5v5 data on NHL teams from the 2007-2008 season to the 2018-2019 season. Specifically 5v5 scoring over these years. It will look at data on skaters, goalies and teams as a whole. The division alignment has changed within this time frame so the teams will be split up into their current divisions (This is for readability more than comparing separate divisions).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>West_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"ARI"</span>, <span class="st">"CGY"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"SJ"</span>, <span class="st">"STL"</span>, <span class="st">"VAN"</span>, <span class="st">"ATL"</span>, <span class="st">"WPG"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"ARI"</span>, <span class="st">"CGY"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"SJ"</span>, <span class="st">"STL"</span>, <span class="st">"VAN"</span>, <span class="st">"ATL"</span>, <span class="st">"WPG"</span>, <span class="st">"VGK"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>East_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BOS"</span>, <span class="st">"BUF"</span>, <span class="st">"CAR"</span>, <span class="st">"CBJ"</span>, <span class="st">"DET"</span>, <span class="st">"FLA"</span>, <span class="st">"MTL"</span>, <span class="st">"NJ"</span>, <span class="st">"NYI"</span>, <span class="st">"NYR"</span>, <span class="st">"OTT"</span>, <span class="st">"PHI"</span>, <span class="st">"PIT"</span>, <span class="st">"TB"</span>, <span class="st">"TOR"</span>, <span class="st">"WSH"</span>))</span>
@@ -223,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ARI"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"STL"</span>, <span class="st">"ATL"</span>, <span class="st">"WPG"</span>))</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="ot">&lt;-</span> West_conf <span class="sc">%&gt;%</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"CGY"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"SJ"</span>, <span class="st">"VAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"CGY"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"SJ"</span>, <span class="st">"VAN"</span>, <span class="st">"VGK"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -265,6 +270,7 @@ $ pdo       &lt;dbl&gt; 100.93, 100.82, 100.98, 100.18, 99.65, 101.60, 102.45, 1
 </div>
 </div>
 <p>There are 28 variables in the teams data set:</p>
+<p>Note: Corsi stat in hockey is Shot attempts</p>
 <ol type="1">
 <li><p><code>team</code>: Team name</p></li>
 <li><p><code>season</code>: Season</p></li>
@@ -295,6 +301,7 @@ $ pdo       &lt;dbl&gt; 100.93, 100.82, 100.98, 100.18, 99.65, 101.60, 102.45, 1
 <li><p><code>sv_pct</code>: Save percentage</p></li>
 <li><p><code>pdo</code>: Just Win Baby</p></li>
 </ol>
+<p>Since we are exploring 5v5, let’s see how important it is by looking at each teams goals for.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -375,6 +382,7 @@ $ pdo       &lt;dbl&gt; 100.93, 100.82, 100.98, 100.18, 99.65, 101.60, 102.45, 1
 </div>
 </div>
 </div>
+<p>So it looks like there was some fluctuation, but on average teams are scoring slightly more on 5v5 now than they used to.</p>
 </section>
 <section id="exploring-some-data-on-skaters" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-some-data-on-skaters">Exploring some data on <code>skaters</code></h2>
@@ -434,6 +442,7 @@ $ cf_pct_qoc  &lt;dbl&gt; 50.10, 48.87, 49.31, 49.94, 50.02, 50.12, 50.19, 50.72
 </div>
 </div>
 <p>There are 48 variables in the skaters data set:</p>
+<p>Note: Corsi stat in hockey is Shot attempts</p>
 <ol type="1">
 <li><p><code>player</code>: Player name</p></li>
 <li><p><code>season</code>: Season</p></li>
@@ -484,6 +493,7 @@ $ cf_pct_qoc  &lt;dbl&gt; 50.10, 48.87, 49.31, 49.94, 50.02, 50.12, 50.19, 50.72
 <li><p><code>toi_pct_qoc</code>: Percentage of team’s total time on ice played by player, weighted by quality of opponents</p></li>
 <li><p><code>cf_pct_qoc</code>: Corsi for percentage weighted by quality of player’s opponents</p></li>
 </ol>
+<p>It would be nice to see if the individual player stats reflect this slight increase in production.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -523,7 +533,7 @@ $ cf_pct_qoc  &lt;dbl&gt; 50.10, 48.87, 49.31, 49.94, 50.02, 50.12, 50.19, 50.72
 <div id="fig-6" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="NHL-Data_files/figure-html/fig-6-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: Number of players with atleast 20% shooting percentage</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: Number of players with at least 20% shooting percentage</figcaption>
 </figure>
 </div>
 </div>
@@ -545,11 +555,12 @@ $ cf_pct_qoc  &lt;dbl&gt; 50.10, 48.87, 49.31, 49.94, 50.02, 50.12, 50.19, 50.72
 <div id="fig-7" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="NHL-Data_files/figure-html/fig-7-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: Number of players with atleast 10% shooting percentage</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Number of players with at least 10% shooting percentage</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Interesting, the amount of players with at least 50 points seems to be trending up in the last couple of years but is not more than some of the years in the past. Also shooting percentage has stayed relatively consistent, but at 20% there were some spikes.</p>
 </section>
 <section id="exploring-some-data-on-goalies" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-some-data-on-goalies">Exploring some data on <code>goalies</code></h2>
@@ -640,7 +651,7 @@ $ gsaa     &lt;dbl&gt; 10.93, 1.05, -3.57, -1.00, -3.92, 3.31, -1.23, 0.12, 0.65
 <div id="fig-9" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="NHL-Data_files/figure-html/fig-9-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Number of who faced</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Number of who goalies faced an average of at least 20 shots a game</figcaption>
 </figure>
 </div>
 </div>
