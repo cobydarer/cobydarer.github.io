@@ -23,46 +23,11 @@ library(lubridate)
 library(tidyr)
 library(ggplot2)
 ```
-## Exploring some data on skaters
-```{r}
-glimpse(skaters)
-```
-
-```{r}
-#| code-fold: true
-skaters %>%
-  filter(p >= 50) %>%
-  ggplot(aes(x = season)) +
-    geom_bar(color = "black", fill = "lightblue") +
-    theme_bw() + 
-    theme(axis.text.x = element_text(angle = 90))
-```
-
-```{r}
-#| code-fold: true
-skaters %>%
-  filter(ish_pct >= 20) %>%
-  ggplot(aes(x = season)) +
-  geom_bar(color = "black", fill = "lightblue") + 
-  theme_bw() + 
-  theme(axis.text.x = element_text(angle = 90))
-
-skaters %>%
-  filter(ish_pct >= 10) %>%
-  ggplot(aes(x = season)) +
-  geom_bar(color = "black", fill = "lightblue") + 
-  theme_bw() + 
-  theme(axis.text.x = element_text(angle = 90))
-```
-## Exploring some data on each team
-```{r}
-glimpse(teams)
-```
 
 ```{r}
 #| code-fold: true
 West_conf <- teams %>%
-  filter(team %in% c("ANA", "ARI", "CGY", "CHI", "COL", "DAL", "EDM", "LA", "MIN", "NSH", "SJ", "STL", "VAN"))
+  filter(team %in% c("ANA", "ARI", "CGY", "CHI", "COL", "DAL", "EDM", "LA", "MIN", "NSH", "SJ", "STL", "VAN", "ATL", "WPG"))
 
 East_conf <- teams %>%
   filter(team %in% c("BOS", "BUF", "CAR", "CBJ", "DET", "FLA", "MTL", "NJ", "NYI", "NYR", "OTT", "PHI", "PIT", "TB", "TOR", "WSH"))
@@ -74,17 +39,83 @@ Metro_div <- East_conf %>%
   filter(team %in% c("CAR", "CBJ", "NJ", "NYI", "NYR", "PHI", "PIT", "WSH"))
 
 Central_div <- West_conf %>%
-  filter(team %in% c("ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL"))
+  filter(team %in% c("ARI", "CHI", "COL", "DAL", "MIN", "NSH", "STL", "ATL", "WPG"))
 
 Pacific_div <- West_conf %>%
   filter(team %in% c("ANA", "CGY", "EDM", "LA", "SJ", "VAN"))
 
 ```
 
+## Exploring some data `teams`
+
+```{r}
+glimpse(teams)
+```
+
+There are 28 variables in the teams data set:
+
+1.    `team`: Team name
+
+2.    `season`: Season
+
+3.    `gp`: Games Played
+    
+4.    `toi` : Time on the ice
+    
+5.    `cf`: Corsi for
+    
+6.    `ca`: Corsi against
+    
+7.    `c_plumin` : Corsi plus/minus (cf-ca)
+    
+8.    `cf_60`: Corsi for per 60 minutes on the ice
+    
+9.    `cf_pct`: Corsi for as a percentage of total corsi
+    
+10.    `ca_60`: Corsi against per 60 minutes on the ice
+    
+11.    `gf` : Goals scored for a player's team
+    
+12.    `ga`: Goals scored against player's team
+    
+13.    `g_plumin`: Goals for - goals against
+    
+14.    `gf_pct`: Percentage of all goals scored by team
+    
+15.    `gf_60`: Goals for per 60 minutes on the ice
+    
+16.    `ga_60`: Goals against per 60 minutes on the ice
+    
+17.    `xgf`: Expected goals for
+    
+18.    `xga`: Expected goals against
+    
+19.    `xg_plumin`: Expected goals for - expected goals against
+    
+20.    `xgf_pct`: Expected goals for as a percentage of total expected goals for
+    
+21.    `xgf_60`: Expected goals for per 60 minutes on the ice
+
+22.    `xga_60`: Expected goals against per 60 minutes on the ice
+
+23.    `pent`: Penalties taken
+
+24.    `pend`: Penalties drawn
+
+25.    `p_plumin`: Penalties taken - individual penalties drawn
+
+26.    `sh_pct`: Shooting percentage
+
+27.    `sv_pct`: Save percentage
+
+28.    `pdo`: Just Win Baby
+
 ```{r}
 #| code-fold: true
 #| warning: false
 #| message: false
+#| label: fig-1
+#| fig-cap: "Number of 5v5 goals for each team each season"
 Central_div %>%
   filter(season != "2012-2013") %>%
   ggplot(aes(x = season, y = gf, color = team)) + 
@@ -92,7 +123,9 @@ Central_div %>%
     geom_line(aes(group = team)) +
     geom_smooth(aes(group = 1), se = FALSE) + 
     theme_bw() + 
-    theme(axis.text.x = element_text(angle = 90))
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Goals For")
 
 Pacific_div %>%
   filter(season != "2012-2013") %>%
@@ -101,7 +134,9 @@ Pacific_div %>%
     geom_line(aes(group = team)) +
     geom_smooth(aes(group = 1), se = FALSE) + 
     theme_bw() + 
-    theme(axis.text.x = element_text(angle = 90))
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Goals For")
 
 Atlantic_div %>%
   filter(season != "2012-2013") %>%
@@ -110,7 +145,9 @@ Atlantic_div %>%
     geom_line(aes(group = team)) +
     geom_smooth(aes(group = 1), se = FALSE) + 
     theme_bw() + 
-    theme(axis.text.x = element_text(angle = 90))
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Goals For")
 
 Metro_div %>%
   filter(season != "2012-2013") %>%
@@ -119,20 +156,341 @@ Metro_div %>%
     geom_line(aes(group = team)) +
     geom_smooth(aes(group = 1), se = FALSE) + 
     theme_bw() + 
-    theme(axis.text.x = element_text(angle = 90))
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Goals For")
 ```
-## Exploring some data on goalies
+
+## Exploring some data on `skaters`
+
+```{r}
+glimpse(skaters)
+```
+
+There are 48 variables in the skaters data set:
+
+1.    `player`: Player name
+
+2.    `season`: Season
+
+3.    `team`: First team player played for in a given season
+    
+4.    `team2` : Second team player played for in a given season
+    
+5.    `team3`: Third team player played for in a given season
+    
+6.    `position`: Player's first position
+    
+7.    `position2` : Player's second position
+    
+8.    `position3`: Player's third position
+    
+9.    `gp`: Games Played
+    
+10.    `toi`: Time on the ice
+    
+11.    `g` : Goals scored
+    
+12.    `a`: Assists
+    
+13.    `p`: Points
+    
+14.    `p1`: Primary points (goals + primary assists)
+    
+15.    `p_60`: Points per 60 minutes on the ice
+    
+16.    `p1_60`: Primary points per 60 minutes on the ice
+    
+17.    `gs`: Game score
+    
+18.    `gs_60`: Game score per 60 minutes on the ice
+    
+19.    `cf`: Corsi for (shot attempts by player's team while player is on the ice)
+    
+20.    `ca`: Corsi against (shot attempts by opposing team will player is on the ice)
+    
+21.    `c_plumin`: Corsi plus/minus (cf-ca)
+
+22.    `cf_pct`: Corsi percentage
+
+23.    `rel_cf_pct`: Relative corsi percentage
+
+24.    `gf`: Goals scored for a player's team
+
+25.    `ga`: Goals scored against player's team
+
+26.    `g_plumin`: Shooting Goals for - goals against
+
+27.    `gf_pct`: Save Percentage of all goals scored by player's team
+
+28.    `rel_gf_pct`: Relative goals for percentage
+
+29.    `xgf`: Expected goals for
+
+30.    `xga`: Expected goals against
+
+31.    `xg_plumin`: Expected goals for - expected goals against
+
+32.    `xgf_pct`: Expected goals for as a percentage of a team's total expected goals for
+
+33.    `rel_xgf_pct`: Relative expected goals for as a percentage of a team's total expected goals for
+
+34.    `ipent`: Individual penalties taken
+
+35.    `ipend`: Individual penalties drawn
+
+36.    `ip_plumin`: Individual penalties taken - individual penalties drawn
+
+37.    `icf`: Individual corsi for
+
+38.    `icf_60`: Individual corsi for per 60 minutes on the ice
+
+39.    `ixgf`: Individual expected goals for
+
+40.    `ixgf_60`: Individual expected goals for per 60 minutes on the ice
+
+41.    `ish_pct`: Individual shooting percentage
+
+42.    `pdo`: Just Win Baby
+
+43.    `zsr`: Zone start ratio
+
+44.    `toi_pct`: Percentage of team's total time on ice played by player
+
+45.    `toi_pct_qot`: Percentage of team's total time on ice played by player, weighted by quality of teammates
+
+46.    `cf_pct_qot`: Corsi for percentage weighted by quality of player's teammates
+
+47.    `toi_pct_qoc`: Percentage of team's total time on ice played by player, weighted by quality of opponents
+
+48.    `cf_pct_qoc`: Corsi for percentage weighted by quality of player's opponents
+
+```{r}
+#| code-fold: true
+#| label: fig-5
+#| fig-cap: "Number of players with 50 or more 5v5 points"
+skaters %>%
+  filter(season != "2012-2013") %>%
+  filter(p >= 50) %>%
+  ggplot(aes(x = season)) +
+    geom_bar(color = "black", fill = "lightblue") +
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Count")
+```
+
+```{r}
+#| code-fold: true
+#| label: fig-6
+#| fig-cap: "Number of players with atleast 20% shooting percentage"
+skaters %>%
+  filter(season != "2012-2013") %>%
+  filter(ish_pct >= 20) %>%
+  ggplot(aes(x = season)) +
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Count")
+```
+
+```{r}
+#| code-fold: true
+#| label: fig-7
+#| fig-cap: "Number of players with atleast 10% shooting percentage"
+
+skaters %>%
+  filter(season != "2012-2013") %>%
+  filter(ish_pct >= 10) %>%
+  ggplot(aes(x = season)) +
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Count")
+```
+
+
+## Exploring some data on `goalies`
+
 ```{r}
 glimpse(goalies)
 ```
 
+There are 16 variables in the teams data set:
+
+1.    `player`: Player name
+
+2.    `season`: Season
+
+3.    `team`: First team player played for in a given season
+    
+4.    `team2` : Second team player played for in a given season
+    
+5.    `team3`: Third team player played for in a given season
+    
+6.    `gp`: Games Played
+    
+7.    `toi` : Time on the ice
+    
+8.    `sa`: Shots against
+    
+9.    `ga`: Goals against
+    
+10.    `sv_pct`: Save percentage
+    
+11.    `xsv_pct` : Expected save percentage
+    
+12.    `dsv_pct`: Dangerous save percentage
+    
+13.    `ldsv_pct`: Low danger save percentage
+    
+14.    `mdsv_pc`: Medium danger save percentage
+    
+15.    `hdsv_pct`: High danger save percentage
+    
+16.    `gsaa`: Goals saved above average
+
 ```{r}
+#| code-fold: true
+#| label: fig-8
+#| fig-cap: "Number of goalies with at least 45 games played and a 91% save percentage"
 goalies %>%
+  filter(season != "2012-2013") %>%
   filter(sv_pct >= 91.00) %>%
   filter(gp >= 45) %>%
   ggplot(aes(x = season)) + 
   geom_bar(color = "black", fill = "lightblue") + 
   theme_bw() + 
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Count")
+```
+
+```{r}
+#| code-fold: true
+#| label: fig-9
+#| fig-cap: "Number of who faced"
+goalies <- goalies %>%
+  mutate(avg_sa_gp = sa/gp)
+
+filtered_goalies <- goalies %>%
+  filter(season != "2012-2013") %>%
+  filter(gp > 5) %>%
+  filter(avg_sa_gp >= 20)
+
+ggplot(filtered_goalies, aes(x = season)) + 
+  geom_bar(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Count")
+
+```
+
+
+## Looking at penalties
+
+```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| label: fig-10
+#| fig-cap: "Number of penalties taken by each team"
+Central_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = pent, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalties Taken")
+
+Pacific_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = pent, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalties Taken")
+
+Atlantic_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = pent, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalties Taken")
+
+Metro_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = pent, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalties Taken")
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| label: fig-14
+#| fig-cap: "Net penalties by each team"
+Central_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = p_plumin, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalty +-")
+
+Pacific_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = p_plumin, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalty +-")
+
+Atlantic_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = p_plumin, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalty +-")
+
+Metro_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = p_plumin, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Penalty +-")
 ```
 

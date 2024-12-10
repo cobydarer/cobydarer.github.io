@@ -147,9 +147,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#loading-the-necessary-packages" id="toc-loading-the-necessary-packages" class="nav-link active" data-scroll-target="#loading-the-necessary-packages">Loading the Necessary Packages</a></li>
-  <li><a href="#exploring-some-data-on-skaters" id="toc-exploring-some-data-on-skaters" class="nav-link" data-scroll-target="#exploring-some-data-on-skaters">Exploring some data on skaters</a></li>
-  <li><a href="#exploring-some-data-on-each-team" id="toc-exploring-some-data-on-each-team" class="nav-link" data-scroll-target="#exploring-some-data-on-each-team">Exploring some data on each team</a></li>
-  <li><a href="#exploring-some-data-on-goalies" id="toc-exploring-some-data-on-goalies" class="nav-link" data-scroll-target="#exploring-some-data-on-goalies">Exploring some data on goalies</a></li>
+  <li><a href="#exploring-some-data-teams" id="toc-exploring-some-data-teams" class="nav-link" data-scroll-target="#exploring-some-data-teams">Exploring some data <code>teams</code></a></li>
+  <li><a href="#exploring-some-data-on-skaters" id="toc-exploring-some-data-on-skaters" class="nav-link" data-scroll-target="#exploring-some-data-on-skaters">Exploring some data on <code>skaters</code></a></li>
+  <li><a href="#exploring-some-data-on-goalies" id="toc-exploring-some-data-on-goalies" class="nav-link" data-scroll-target="#exploring-some-data-on-goalies">Exploring some data on <code>goalies</code></a></li>
+  <li><a href="#looking-at-penalties" id="toc-looking-at-penalties" class="nav-link" data-scroll-target="#looking-at-penalties">Looking at penalties</a></li>
   </ul>
 </nav>
     </div>
@@ -203,11 +204,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>West_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"ARI"</span>, <span class="st">"CGY"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"SJ"</span>, <span class="st">"STL"</span>, <span class="st">"VAN"</span>, <span class="st">"ATL"</span>, <span class="st">"WPG"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>East_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BOS"</span>, <span class="st">"BUF"</span>, <span class="st">"CAR"</span>, <span class="st">"CBJ"</span>, <span class="st">"DET"</span>, <span class="st">"FLA"</span>, <span class="st">"MTL"</span>, <span class="st">"NJ"</span>, <span class="st">"NYI"</span>, <span class="st">"NYR"</span>, <span class="st">"OTT"</span>, <span class="st">"PHI"</span>, <span class="st">"PIT"</span>, <span class="st">"TB"</span>, <span class="st">"TOR"</span>, <span class="st">"WSH"</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="ot">&lt;-</span> East_conf <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BOS"</span>, <span class="st">"BUF"</span>, <span class="st">"DET"</span>, <span class="st">"FLA"</span>, <span class="st">"MTL"</span>, <span class="st">"OTT"</span>, <span class="st">"TB"</span>, <span class="st">"TOR"</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="ot">&lt;-</span> East_conf <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CAR"</span>, <span class="st">"CBJ"</span>, <span class="st">"NJ"</span>, <span class="st">"NYI"</span>, <span class="st">"NYR"</span>, <span class="st">"PHI"</span>, <span class="st">"PIT"</span>, <span class="st">"WSH"</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Central_div <span class="ot">&lt;-</span> West_conf <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ARI"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"STL"</span>, <span class="st">"ATL"</span>, <span class="st">"WPG"</span>))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="ot">&lt;-</span> West_conf <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"CGY"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"SJ"</span>, <span class="st">"VAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="exploring-some-data-teams" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-some-data-teams">Exploring some data <code>teams</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 362
+Columns: 28
+$ team      &lt;chr&gt; "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA…
+$ season    &lt;chr&gt; "2007-2008", "2008-2009", "2009-2010", "2010-2011", "2011-20…
+$ gp        &lt;dbl&gt; 81, 82, 82, 82, 82, 48, 82, 82, 82, 82, 82, 81, 81, 81, 82, …
+$ toi       &lt;dbl&gt; 3396.38, 3645.19, 3746.91, 3852.90, 3890.68, 2319.80, 3822.9…
+$ cf        &lt;dbl&gt; 2596, 3060, 3141, 3024, 3326, 1970, 3500, 3610, 3646, 3495, …
+$ ca        &lt;dbl&gt; 2523, 2945, 3493, 3794, 3526, 2140, 3528, 3474, 3310, 3542, …
+$ c_plumin  &lt;dbl&gt; 73, 115, -352, -770, -200, -170, -28, 136, 336, -47, -207, -…
+$ cf_pct    &lt;dbl&gt; 50.71, 50.96, 47.35, 44.35, 48.54, 47.93, 49.80, 50.96, 52.4…
+$ cf_60     &lt;dbl&gt; 45.86, 50.37, 50.30, 47.09, 51.29, 50.95, 54.93, 55.51, 56.3…
+$ ca_60     &lt;dbl&gt; 44.57, 48.47, 55.93, 59.08, 54.38, 55.35, 55.37, 53.42, 51.1…
+$ gf        &lt;dbl&gt; 107, 145, 146, 134, 138, 89, 187, 158, 128, 145, 158, 136, 1…
+$ ga        &lt;dbl&gt; 95, 130, 144, 154, 154, 72, 133, 149, 131, 128, 135, 152, 13…
+$ g_plumin  &lt;dbl&gt; 12, 15, 2, -20, -16, 17, 54, 9, -3, 17, 23, -16, -12, -32, 2…
+$ gf_pct    &lt;dbl&gt; 52.97, 52.73, 50.34, 46.53, 47.26, 55.28, 58.44, 51.47, 49.4…
+$ gf_60     &lt;dbl&gt; 1.89, 2.39, 2.34, 2.09, 2.13, 2.30, 2.93, 2.43, 1.98, 2.25, …
+$ ga_60     &lt;dbl&gt; 1.68, 2.14, 2.31, 2.40, 2.37, 1.86, 2.09, 2.29, 2.02, 1.98, …
+$ xgf       &lt;dbl&gt; 108.93, 134.91, 132.19, 123.01, 133.14, 81.87, 153.17, 149.0…
+$ xga       &lt;dbl&gt; 114.61, 129.11, 156.27, 156.05, 149.34, 81.65, 144.53, 136.8…
+$ xg_plumin &lt;dbl&gt; -5.68, 5.80, -24.08, -33.04, -16.20, 0.22, 8.64, 12.21, 16.5…
+$ xgf_pct   &lt;dbl&gt; 48.73, 51.10, 45.83, 44.08, 47.13, 50.07, 51.45, 52.13, 53.0…
+$ xgf_60    &lt;dbl&gt; 1.92, 2.22, 2.12, 1.92, 2.05, 2.12, 2.40, 2.29, 2.26, 2.37, …
+$ xga_60    &lt;dbl&gt; 2.02, 2.13, 2.50, 2.43, 2.30, 2.11, 2.27, 2.10, 2.00, 2.19, …
+$ pent      &lt;dbl&gt; 406, 407, 378, 336, 274, 162, 292, 263, 329, 304, 271, 242, …
+$ pend      &lt;dbl&gt; 372, 337, 351, 309, 260, 137, 293, 251, 272, 275, 223, 204, …
+$ p_plumin  &lt;dbl&gt; -34, -70, -27, -27, -14, -25, 1, -12, -57, -29, -48, -38, -5…
+$ sh_pct    &lt;dbl&gt; 7.30, 8.40, 8.23, 7.87, 7.99, 8.59, 9.83, 8.48, 6.69, 7.77, …
+$ sv_pct    &lt;dbl&gt; 93.62, 92.42, 92.75, 92.31, 91.66, 93.01, 92.62, 91.82, 92.3…
+$ pdo       &lt;dbl&gt; 100.93, 100.82, 100.98, 100.18, 99.65, 101.60, 102.45, 100.3…</code></pre>
+</div>
+</div>
+<p>There are 28 variables in the teams data set:</p>
+<ol type="1">
+<li><p><code>team</code>: Team name</p></li>
+<li><p><code>season</code>: Season</p></li>
+<li><p><code>gp</code>: Games Played</p></li>
+<li><p><code>toi</code> : Time on the ice</p></li>
+<li><p><code>cf</code>: Corsi for</p></li>
+<li><p><code>ca</code>: Corsi against</p></li>
+<li><p><code>c_plumin</code> : Corsi plus/minus (cf-ca)</p></li>
+<li><p><code>cf_60</code>: Corsi for per 60 minutes on the ice</p></li>
+<li><p><code>cf_pct</code>: Corsi for as a percentage of total corsi</p></li>
+<li><p><code>ca_60</code>: Corsi against per 60 minutes on the ice</p></li>
+<li><p><code>gf</code> : Goals scored for a player’s team</p></li>
+<li><p><code>ga</code>: Goals scored against player’s team</p></li>
+<li><p><code>g_plumin</code>: Goals for - goals against</p></li>
+<li><p><code>gf_pct</code>: Percentage of all goals scored by team</p></li>
+<li><p><code>gf_60</code>: Goals for per 60 minutes on the ice</p></li>
+<li><p><code>ga_60</code>: Goals against per 60 minutes on the ice</p></li>
+<li><p><code>xgf</code>: Expected goals for</p></li>
+<li><p><code>xga</code>: Expected goals against</p></li>
+<li><p><code>xg_plumin</code>: Expected goals for - expected goals against</p></li>
+<li><p><code>xgf_pct</code>: Expected goals for as a percentage of total expected goals for</p></li>
+<li><p><code>xgf_60</code>: Expected goals for per 60 minutes on the ice</p></li>
+<li><p><code>xga_60</code>: Expected goals against per 60 minutes on the ice</p></li>
+<li><p><code>pent</code>: Penalties taken</p></li>
+<li><p><code>pend</code>: Penalties drawn</p></li>
+<li><p><code>p_plumin</code>: Penalties taken - individual penalties drawn</p></li>
+<li><p><code>sh_pct</code>: Shooting percentage</p></li>
+<li><p><code>sv_pct</code>: Save percentage</p></li>
+<li><p><code>pdo</code>: Just Win Baby</p></li>
+</ol>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Central_div <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Goals For"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Goals For"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="sc">%&gt;%</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Goals For"</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="sc">%&gt;%</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Goals For"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-1-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Number of 5v5 goals for each team each season</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-1-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-1-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Number of 5v5 goals for each team each season</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-1-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-1-3.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Number of 5v5 goals for each team each season</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-1-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-1-4.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Number of 5v5 goals for each team each season</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="exploring-some-data-on-skaters" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-some-data-on-skaters">Exploring some data on skaters</h2>
+<h2 class="anchored" data-anchor-id="exploring-some-data-on-skaters">Exploring some data on <code>skaters</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(skaters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(skaters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 9,402
 Columns: 48
@@ -261,169 +433,128 @@ $ toi_pct_qoc &lt;dbl&gt; 28.78, 27.06, 28.56, 28.77, 28.91, 29.52, 29.89, 28.06
 $ cf_pct_qoc  &lt;dbl&gt; 50.10, 48.87, 49.31, 49.94, 50.02, 50.12, 50.19, 50.72, 48…</code></pre>
 </div>
 </div>
+<p>There are 48 variables in the skaters data set:</p>
+<ol type="1">
+<li><p><code>player</code>: Player name</p></li>
+<li><p><code>season</code>: Season</p></li>
+<li><p><code>team</code>: First team player played for in a given season</p></li>
+<li><p><code>team2</code> : Second team player played for in a given season</p></li>
+<li><p><code>team3</code>: Third team player played for in a given season</p></li>
+<li><p><code>position</code>: Player’s first position</p></li>
+<li><p><code>position2</code> : Player’s second position</p></li>
+<li><p><code>position3</code>: Player’s third position</p></li>
+<li><p><code>gp</code>: Games Played</p></li>
+<li><p><code>toi</code>: Time on the ice</p></li>
+<li><p><code>g</code> : Goals scored</p></li>
+<li><p><code>a</code>: Assists</p></li>
+<li><p><code>p</code>: Points</p></li>
+<li><p><code>p1</code>: Primary points (goals + primary assists)</p></li>
+<li><p><code>p_60</code>: Points per 60 minutes on the ice</p></li>
+<li><p><code>p1_60</code>: Primary points per 60 minutes on the ice</p></li>
+<li><p><code>gs</code>: Game score</p></li>
+<li><p><code>gs_60</code>: Game score per 60 minutes on the ice</p></li>
+<li><p><code>cf</code>: Corsi for (shot attempts by player’s team while player is on the ice)</p></li>
+<li><p><code>ca</code>: Corsi against (shot attempts by opposing team will player is on the ice)</p></li>
+<li><p><code>c_plumin</code>: Corsi plus/minus (cf-ca)</p></li>
+<li><p><code>cf_pct</code>: Corsi percentage</p></li>
+<li><p><code>rel_cf_pct</code>: Relative corsi percentage</p></li>
+<li><p><code>gf</code>: Goals scored for a player’s team</p></li>
+<li><p><code>ga</code>: Goals scored against player’s team</p></li>
+<li><p><code>g_plumin</code>: Shooting Goals for - goals against</p></li>
+<li><p><code>gf_pct</code>: Save Percentage of all goals scored by player’s team</p></li>
+<li><p><code>rel_gf_pct</code>: Relative goals for percentage</p></li>
+<li><p><code>xgf</code>: Expected goals for</p></li>
+<li><p><code>xga</code>: Expected goals against</p></li>
+<li><p><code>xg_plumin</code>: Expected goals for - expected goals against</p></li>
+<li><p><code>xgf_pct</code>: Expected goals for as a percentage of a team’s total expected goals for</p></li>
+<li><p><code>rel_xgf_pct</code>: Relative expected goals for as a percentage of a team’s total expected goals for</p></li>
+<li><p><code>ipent</code>: Individual penalties taken</p></li>
+<li><p><code>ipend</code>: Individual penalties drawn</p></li>
+<li><p><code>ip_plumin</code>: Individual penalties taken - individual penalties drawn</p></li>
+<li><p><code>icf</code>: Individual corsi for</p></li>
+<li><p><code>icf_60</code>: Individual corsi for per 60 minutes on the ice</p></li>
+<li><p><code>ixgf</code>: Individual expected goals for</p></li>
+<li><p><code>ixgf_60</code>: Individual expected goals for per 60 minutes on the ice</p></li>
+<li><p><code>ish_pct</code>: Individual shooting percentage</p></li>
+<li><p><code>pdo</code>: Just Win Baby</p></li>
+<li><p><code>zsr</code>: Zone start ratio</p></li>
+<li><p><code>toi_pct</code>: Percentage of team’s total time on ice played by player</p></li>
+<li><p><code>toi_pct_qot</code>: Percentage of team’s total time on ice played by player, weighted by quality of teammates</p></li>
+<li><p><code>cf_pct_qot</code>: Corsi for percentage weighted by quality of player’s teammates</p></li>
+<li><p><code>toi_pct_qoc</code>: Percentage of team’s total time on ice played by player, weighted by quality of opponents</p></li>
+<li><p><code>cf_pct_qoc</code>: Corsi for percentage weighted by quality of player’s opponents</p></li>
+</ol>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p <span class="sc">&gt;=</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p <span class="sc">&gt;=</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div id="fig-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Number of players with 50 or more 5v5 points</figcaption>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ish_pct <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ish_pct <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div id="fig-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Number of players with atleast 20% shooting percentage</figcaption>
+</figure>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ish_pct <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="exploring-some-data-on-each-team" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-some-data-on-each-team">Exploring some data on each team</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 362
-Columns: 28
-$ team      &lt;chr&gt; "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA", "ANA…
-$ season    &lt;chr&gt; "2007-2008", "2008-2009", "2009-2010", "2010-2011", "2011-20…
-$ gp        &lt;dbl&gt; 81, 82, 82, 82, 82, 48, 82, 82, 82, 82, 82, 81, 81, 81, 82, …
-$ toi       &lt;dbl&gt; 3396.38, 3645.19, 3746.91, 3852.90, 3890.68, 2319.80, 3822.9…
-$ cf        &lt;dbl&gt; 2596, 3060, 3141, 3024, 3326, 1970, 3500, 3610, 3646, 3495, …
-$ ca        &lt;dbl&gt; 2523, 2945, 3493, 3794, 3526, 2140, 3528, 3474, 3310, 3542, …
-$ c_plumin  &lt;dbl&gt; 73, 115, -352, -770, -200, -170, -28, 136, 336, -47, -207, -…
-$ cf_pct    &lt;dbl&gt; 50.71, 50.96, 47.35, 44.35, 48.54, 47.93, 49.80, 50.96, 52.4…
-$ cf_60     &lt;dbl&gt; 45.86, 50.37, 50.30, 47.09, 51.29, 50.95, 54.93, 55.51, 56.3…
-$ ca_60     &lt;dbl&gt; 44.57, 48.47, 55.93, 59.08, 54.38, 55.35, 55.37, 53.42, 51.1…
-$ gf        &lt;dbl&gt; 107, 145, 146, 134, 138, 89, 187, 158, 128, 145, 158, 136, 1…
-$ ga        &lt;dbl&gt; 95, 130, 144, 154, 154, 72, 133, 149, 131, 128, 135, 152, 13…
-$ g_plumin  &lt;dbl&gt; 12, 15, 2, -20, -16, 17, 54, 9, -3, 17, 23, -16, -12, -32, 2…
-$ gf_pct    &lt;dbl&gt; 52.97, 52.73, 50.34, 46.53, 47.26, 55.28, 58.44, 51.47, 49.4…
-$ gf_60     &lt;dbl&gt; 1.89, 2.39, 2.34, 2.09, 2.13, 2.30, 2.93, 2.43, 1.98, 2.25, …
-$ ga_60     &lt;dbl&gt; 1.68, 2.14, 2.31, 2.40, 2.37, 1.86, 2.09, 2.29, 2.02, 1.98, …
-$ xgf       &lt;dbl&gt; 108.93, 134.91, 132.19, 123.01, 133.14, 81.87, 153.17, 149.0…
-$ xga       &lt;dbl&gt; 114.61, 129.11, 156.27, 156.05, 149.34, 81.65, 144.53, 136.8…
-$ xg_plumin &lt;dbl&gt; -5.68, 5.80, -24.08, -33.04, -16.20, 0.22, 8.64, 12.21, 16.5…
-$ xgf_pct   &lt;dbl&gt; 48.73, 51.10, 45.83, 44.08, 47.13, 50.07, 51.45, 52.13, 53.0…
-$ xgf_60    &lt;dbl&gt; 1.92, 2.22, 2.12, 1.92, 2.05, 2.12, 2.40, 2.29, 2.26, 2.37, …
-$ xga_60    &lt;dbl&gt; 2.02, 2.13, 2.50, 2.43, 2.30, 2.11, 2.27, 2.10, 2.00, 2.19, …
-$ pent      &lt;dbl&gt; 406, 407, 378, 336, 274, 162, 292, 263, 329, 304, 271, 242, …
-$ pend      &lt;dbl&gt; 372, 337, 351, 309, 260, 137, 293, 251, 272, 275, 223, 204, …
-$ p_plumin  &lt;dbl&gt; -34, -70, -27, -27, -14, -25, 1, -12, -57, -29, -48, -38, -5…
-$ sh_pct    &lt;dbl&gt; 7.30, 8.40, 8.23, 7.87, 7.99, 8.59, 9.83, 8.48, 6.69, 7.77, …
-$ sv_pct    &lt;dbl&gt; 93.62, 92.42, 92.75, 92.31, 91.66, 93.01, 92.62, 91.82, 92.3…
-$ pdo       &lt;dbl&gt; 100.93, 100.82, 100.98, 100.18, 99.65, 101.60, 102.45, 100.3…</code></pre>
 </div>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>West_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"ARI"</span>, <span class="st">"CGY"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"SJ"</span>, <span class="st">"STL"</span>, <span class="st">"VAN"</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>East_conf <span class="ot">&lt;-</span> teams <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BOS"</span>, <span class="st">"BUF"</span>, <span class="st">"CAR"</span>, <span class="st">"CBJ"</span>, <span class="st">"DET"</span>, <span class="st">"FLA"</span>, <span class="st">"MTL"</span>, <span class="st">"NJ"</span>, <span class="st">"NYI"</span>, <span class="st">"NYR"</span>, <span class="st">"OTT"</span>, <span class="st">"PHI"</span>, <span class="st">"PIT"</span>, <span class="st">"TB"</span>, <span class="st">"TOR"</span>, <span class="st">"WSH"</span>))</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="ot">&lt;-</span> East_conf <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BOS"</span>, <span class="st">"BUF"</span>, <span class="st">"DET"</span>, <span class="st">"FLA"</span>, <span class="st">"MTL"</span>, <span class="st">"OTT"</span>, <span class="st">"TB"</span>, <span class="st">"TOR"</span>))</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="ot">&lt;-</span> East_conf <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CAR"</span>, <span class="st">"CBJ"</span>, <span class="st">"NJ"</span>, <span class="st">"NYI"</span>, <span class="st">"NYR"</span>, <span class="st">"PHI"</span>, <span class="st">"PIT"</span>, <span class="st">"WSH"</span>))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>Central_div <span class="ot">&lt;-</span> West_conf <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ARI"</span>, <span class="st">"CHI"</span>, <span class="st">"COL"</span>, <span class="st">"DAL"</span>, <span class="st">"MIN"</span>, <span class="st">"NSH"</span>, <span class="st">"STL"</span>))</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="ot">&lt;-</span> West_conf <span class="sc">%&gt;%</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ANA"</span>, <span class="st">"CGY"</span>, <span class="st">"EDM"</span>, <span class="st">"LA"</span>, <span class="st">"SJ"</span>, <span class="st">"VAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Central_div <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>skaters <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ish_pct <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div id="fig-7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Number of players with atleast 10% shooting percentage</figcaption>
+</figure>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> gf, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="exploring-some-data-on-goalies" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-some-data-on-goalies">Exploring some data on goalies</h2>
+<h2 class="anchored" data-anchor-id="exploring-some-data-on-goalies">Exploring some data on <code>goalies</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(goalies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(goalies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 856
 Columns: 16
@@ -445,16 +576,236 @@ $ hdsv_pct &lt;dbl&gt; 82.05, 77.52, 78.30, 81.82, 72.41, 83.64, 79.33, 80.23, 8
 $ gsaa     &lt;dbl&gt; 10.93, 1.05, -3.57, -1.00, -3.92, 3.31, -1.23, 0.12, 0.65, -1…</code></pre>
 </div>
 </div>
+<p>There are 16 variables in the teams data set:</p>
+<ol type="1">
+<li><p><code>player</code>: Player name</p></li>
+<li><p><code>season</code>: Season</p></li>
+<li><p><code>team</code>: First team player played for in a given season</p></li>
+<li><p><code>team2</code> : Second team player played for in a given season</p></li>
+<li><p><code>team3</code>: Third team player played for in a given season</p></li>
+<li><p><code>gp</code>: Games Played</p></li>
+<li><p><code>toi</code> : Time on the ice</p></li>
+<li><p><code>sa</code>: Shots against</p></li>
+<li><p><code>ga</code>: Goals against</p></li>
+<li><p><code>sv_pct</code>: Save percentage</p></li>
+<li><p><code>xsv_pct</code> : Expected save percentage</p></li>
+<li><p><code>dsv_pct</code>: Dangerous save percentage</p></li>
+<li><p><code>ldsv_pct</code>: Low danger save percentage</p></li>
+<li><p><code>mdsv_pc</code>: Medium danger save percentage</p></li>
+<li><p><code>hdsv_pct</code>: High danger save percentage</p></li>
+<li><p><code>gsaa</code>: Goals saved above average</p></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>goalies <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sv_pct <span class="sc">&gt;=</span> <span class="fl">91.00</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gp <span class="sc">&gt;=</span> <span class="dv">45</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span> </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>goalies <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sv_pct <span class="sc">&gt;=</span> <span class="fl">91.00</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gp <span class="sc">&gt;=</span> <span class="dv">45</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="NHL-Data_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div id="fig-8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Number of goalies with at least 45 games played and a 91% save percentage</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>goalies <span class="ot">&lt;-</span> goalies <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_sa_gp =</span> sa<span class="sc">/</span>gp)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>filtered_goalies <span class="ot">&lt;-</span> goalies <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gp <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(avg_sa_gp <span class="sc">&gt;=</span> <span class="dv">20</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(filtered_goalies, <span class="fu">aes</span>(<span class="at">x =</span> season)) <span class="sc">+</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span> </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-9" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Number of who faced</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="looking-at-penalties" class="level2">
+<h2 class="anchored" data-anchor-id="looking-at-penalties">Looking at penalties</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Central_div <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> pent, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalties Taken"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> pent, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalties Taken"</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="sc">%&gt;%</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> pent, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalties Taken"</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="sc">%&gt;%</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> pent, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalties Taken"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-10-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Number of penalties taken by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-10-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-10-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Number of penalties taken by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-10-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-10-3.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Number of penalties taken by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-10-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-10-4.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Number of penalties taken by each team</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Central_div <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> p_plumin, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalty +-"</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>Pacific_div <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> p_plumin, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalty +-"</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>Atlantic_div <span class="sc">%&gt;%</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> p_plumin, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalty +-"</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>Metro_div <span class="sc">%&gt;%</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(season <span class="sc">!=</span> <span class="st">"2012-2013"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> season, <span class="at">y =</span> p_plumin, <span class="at">color =</span> team)) <span class="sc">+</span> </span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> team)) <span class="sc">+</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span> </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Season"</span>,</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Penalty +-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-14-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Net penalties by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-14-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-14-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Net penalties by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-14-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-14-3.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Net penalties by each team</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-14-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="NHL-Data_files/figure-html/fig-14-4.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Net penalties by each team</figcaption>
+</figure>
+</div>
 </div>
 </div>
 

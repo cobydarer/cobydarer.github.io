@@ -3,6 +3,6 @@ title: "Projects"
 ---
 
 * [Combining Data Frames](Quarto-Presentation.qmd)
-* [Final Project 2](./Final-Project/NHL-Data.qmd)
+* [Final Project](./Final-Project/NHL-Data.qmd)
 * [Project 3]()
 * [Project 4]()
