@@ -167,6 +167,59 @@ Metro_div %>%
     labs(x = "Season",
          y = "Goals For")
 ```
+
+Now let's look at shot attempts over the years.
+```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| label: fig-5
+#| fig-cap: "Number of 5v5 shot attempts for each team each season"
+Central_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = cf/gp, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Shot Attempts")
+
+Pacific_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = cf/gp, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Shot Attempts")
+
+Atlantic_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = cf/gp, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Shot Attempts")
+
+Metro_div %>%
+  filter(season != "2012-2013") %>%
+  ggplot(aes(x = season, y = cf/gp, color = team)) + 
+    geom_point() +
+    geom_line(aes(group = team)) +
+    geom_smooth(aes(group = 1), se = FALSE) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    labs(x = "Season",
+         y = "Shot Attempts")
+```
+
 So it looks like there was some fluctuation, but on average teams are scoring slightly more on 5v5 now than they used to.
 
 ## Exploring some data on `skaters`
@@ -278,7 +331,7 @@ Note: Corsi stat in hockey is Shot attempts
 It would be nice to see if the individual player stats reflect this slight increase in production.
 ```{r}
 #| code-fold: true
-#| label: fig-5
+#| label: fig-9
 #| fig-cap: "Number of players with 50 or more 5v5 points"
 skaters %>%
   filter(season != "2012-2013") %>%
@@ -293,7 +346,7 @@ skaters %>%
 
 ```{r}
 #| code-fold: true
-#| label: fig-6
+#| label: fig-10
 #| fig-cap: "Number of players with at least 20% shooting percentage"
 skaters %>%
   filter(season != "2012-2013") %>%
@@ -308,7 +361,7 @@ skaters %>%
 
 ```{r}
 #| code-fold: true
-#| label: fig-7
+#| label: fig-11
 #| fig-cap: "Number of players with at least 10% shooting percentage"
 
 skaters %>%
@@ -364,16 +417,17 @@ There are 16 variables in the teams data set:
     
 16.    `gsaa`: Goals saved above average
 
+How have the goalies been affected over the years?
 ```{r}
 #| code-fold: true
-#| label: fig-8
+#| label: fig-12
 #| fig-cap: "Number of goalies with at least 45 games played and a 91% save percentage"
 goalies %>%
   filter(season != "2012-2013") %>%
   filter(sv_pct >= 91.00) %>%
   filter(gp >= 45) %>%
   ggplot(aes(x = season)) + 
-  geom_bar(color = "black", fill = "lightblue") + 
+  geom_bar(color = "black", fill = "pink") + 
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
@@ -382,7 +436,7 @@ goalies %>%
 
 ```{r}
 #| code-fold: true
-#| label: fig-9
+#| label: fig-13
 #| fig-cap: "Number of who goalies faced an average of at least 20 shots a game"
 goalies <- goalies %>%
   mutate(avg_sa_gp = sa/gp)
@@ -393,14 +447,12 @@ filtered_goalies <- goalies %>%
   filter(avg_sa_gp >= 20)
 
 ggplot(filtered_goalies, aes(x = season)) + 
-  geom_bar(color = "black", fill = "lightblue") + 
+  geom_bar(color = "black", fill = "pink") + 
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
          y = "Count")
-
 ```
-
 
 ## Looking at penalties
 
@@ -408,7 +460,7 @@ ggplot(filtered_goalies, aes(x = season)) +
 #| code-fold: true
 #| warning: false
 #| message: false
-#| label: fig-10
+#| label: fig-14
 #| fig-cap: "Number of penalties taken by each team"
 Central_div %>%
   filter(season != "2012-2013") %>%
@@ -459,7 +511,7 @@ Metro_div %>%
 #| code-fold: true
 #| warning: false
 #| message: false
-#| label: fig-14
+#| label: fig-18
 #| fig-cap: "Net penalties by each team"
 Central_div %>%
   filter(season != "2012-2013") %>%
