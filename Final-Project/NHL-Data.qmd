@@ -184,7 +184,7 @@ Central_div %>%
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
-         y = "Shot Attempts")
+         y = "Shot Attempts per Game")
 
 Pacific_div %>%
   filter(season != "2012-2013") %>%
@@ -195,7 +195,7 @@ Pacific_div %>%
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
-         y = "Shot Attempts")
+         y = "Shot Attempts per Game")
 
 Atlantic_div %>%
   filter(season != "2012-2013") %>%
@@ -206,7 +206,7 @@ Atlantic_div %>%
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
-         y = "Shot Attempts")
+         y = "Shot Attempts per Game")
 
 Metro_div %>%
   filter(season != "2012-2013") %>%
@@ -217,10 +217,10 @@ Metro_div %>%
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90)) + 
     labs(x = "Season",
-         y = "Shot Attempts")
+         y = "Shot Attempts per Game")
 ```
 
-So it looks like there was some fluctuation, but on average teams are scoring slightly more on 5v5 now than they used to.
+So it looks like there was some fluctuation, but on average teams are scoring slightly more on 5v5 now than they used to and they are attempting more shots per game.
 
 ## Exploring some data on `skaters`
 
