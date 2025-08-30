@@ -12,7 +12,7 @@ website:
       - project.qmd
     
     tools:
-      - icon: linkedin
+      - icon: trash
         href: https://www.linkedin.com/in/jacob-coby-darer-48318a378/
       - icon: github
         href: https://github.com/cobydarer
