@@ -2,7 +2,6 @@
 title: "Projects"
 ---
 
-* [Combining Data Frames](Quarto-Presentation.qmd)
-* [Final Project](./Final-Project/NHL-Data.qmd)
-* [Project 3]()
-* [Project 4]()
+* [Combining Data Frames in R](Quarto-Presentation.qmd)
+* [Analyzing 5v5 Scoring Trends in the NHL, 2007-2019](./Final-Project/NHL-Data.qmd)
+

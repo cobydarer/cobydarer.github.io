@@ -4,6 +4,4 @@ title: "About Me"
 
 ![](./Pics/Beach_pic.jpg){width="300"} ![](./Pics/SSK0087.JPEG){width="267"}
 
-```{r}
-
-```
+As a hockey player, rock climber, and life long sports fan, I am excited to combine my strong math skills with my passion for sports. Through my internships with the App State baseball team and Prep Baseball Report, I am strengthening and expanding my skills in data collection and analysis through real world experience.

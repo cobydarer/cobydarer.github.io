@@ -39,14 +39,14 @@
     "href": "project.html",
     "title": "Projects",
     "section": "",
-    "text": "Combining Data Frames\nFinal Project\nProject 3\nProject 4"
+    "text": "Combining Data Frames in R\nAnalyzing 5v5 Scoring Trends in the NHL, 2007-2019"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Coby Darer",
     "section": "",
-    "text": "Explore this webpage to learn more about me and what projects I have completed!"
+    "text": "Appalachian State University\n\nBachelor of science 2026\nMajor: General mathematics\nMinor: Statistics\nOther: Sports analytics certificate\n\nExplore this webpage to learn more about me and what data analytics project I have completed"
   },
   {
     "objectID": "Final-Project/NHL-Data.html#looking-at-penalties",
@@ -68,5 +68,12 @@
     "title": "Analyzing NHL Data from 2007-2008 to 2018-2019",
     "section": "Introduction",
     "text": "Introduction\nThis project will explore some of the 5v5 data on NHL teams from the 2007-2008 season to the 2018-2019 season. Specifically 5v5 scoring over these years. It will look at data on skaters, goalies and teams as a whole. The division alignment has changed within this time frame so the teams will be split up into their current divisions (This is for readability more than comparing separate divisions).\n\n\nCode\nWest_conf &lt;- teams %&gt;%\n  filter(team %in% c(\"ANA\", \"ARI\", \"CGY\", \"CHI\", \"COL\", \"DAL\", \"EDM\", \"LA\", \"MIN\", \"NSH\", \"SJ\", \"STL\", \"VAN\", \"ATL\", \"WPG\", \"VGK\"))\n\nEast_conf &lt;- teams %&gt;%\n  filter(team %in% c(\"BOS\", \"BUF\", \"CAR\", \"CBJ\", \"DET\", \"FLA\", \"MTL\", \"NJ\", \"NYI\", \"NYR\", \"OTT\", \"PHI\", \"PIT\", \"TB\", \"TOR\", \"WSH\"))\n\nAtlantic_div &lt;- East_conf %&gt;%\n  filter(team %in% c(\"BOS\", \"BUF\", \"DET\", \"FLA\", \"MTL\", \"OTT\", \"TB\", \"TOR\"))\n\nMetro_div &lt;- East_conf %&gt;%\n  filter(team %in% c(\"CAR\", \"CBJ\", \"NJ\", \"NYI\", \"NYR\", \"PHI\", \"PIT\", \"WSH\"))\n\nCentral_div &lt;- West_conf %&gt;%\n  filter(team %in% c(\"ARI\", \"CHI\", \"COL\", \"DAL\", \"MIN\", \"NSH\", \"STL\", \"ATL\", \"WPG\"))\n\nPacific_div &lt;- West_conf %&gt;%\n  filter(team %in% c(\"ANA\", \"CGY\", \"EDM\", \"LA\", \"SJ\", \"VAN\", \"VGK\"))"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "As a hockey player, rock climber, and life long sports fan, I am excited to combine my strong math skills with my passion for sports. Through my internships with the App State baseball team and Prep Baseball Report, I am strengthening and expanding my skills in data collection and analysis through real world experience."
   }
 ]
