@@ -4,7 +4,7 @@ title: "Coby Darer"
 
 Appalachian State University
 
-- Bachelor of science 2026
+- Bachelor of Science, 2026
 
 - **Major**: General mathematics
 
@@ -12,5 +12,5 @@ Appalachian State University
 
 - **Other**: Sports analytics certificate
 
-Explore this webpage to learn more about me and what data analytics project I have completed
+Explore this webpage to learn more about me and what data analytics project I have completed.
 
