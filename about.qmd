@@ -2,7 +2,7 @@
 title: "About Me"
 ---
 
-![](./Pics/Beach_pic.jpg){width="250"} ![](./Pics/Climbing_pic.JPEG){width="250"}
+![](./Pics/Climbing_pic.JPEG){width="250"}
 
 ![](./Pics/DSC_4973.JPG){width="400"}
 
