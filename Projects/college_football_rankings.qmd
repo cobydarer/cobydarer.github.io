@@ -1,0 +1,166 @@
+---
+title: "College Football Rankings"
+format: 
+  html:
+    theme: cosmo  # zephyr pulse, sketchy, default, cosmo, vapor etc
+author:
+  - name: Coby Darer
+    email: cobydarer@gmail.com
+    affiliation:
+      - name: Appalachian State University
+        city: Boone
+        state: NC  
+        url: https://www.appstate.edu/
+code-fold: true
+---
+
+## Loading the Necessary Packages and Data
+```{r, message=FALSE}
+#| code-fold: false
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(knitr)
+college_games <- read_excel("College_Football_2025_Season_Games.xlsx")
+```
+
+## Introduction
+
+This project will create a ranking system for college football and rank teams for the 2025 season, using data through week ten. It will also predict the winner of some week eleven games and compare it to the actual outcome.
+
+## Ranking System
+
+For my ranking system I created variables that I thought are important and assigned a point value to each one. Then ranked the teams based on who had the most points.
+
+If you win the game:
+
+* Win: 1 point
+
+* MOV: MOV / 30 * 0.4, 0.4 points max
+
+* Opponent’s current record: opponent win% * 0.6, 0.6 points max
+
+* Opponent’s rank: (26 - opponent rank) / 25 * 0.85, 0.85 points max
+
+If you lose
+
+* Team that beats you rank: (26 - winner rank) / 25 * 1.2, 1.2 points max
+
+## Margin of Victory and Recent Games
+
+I considered margin of victory in my rankings system because I think being able to beat a team by a lot of points shows you are a better team than if majority of the games played are close. I used margin of victory to increase the amount of points a team gets for winning a game, capping margin of victory at 30. Winning by 30 and by 50 is the same for example. Also I did not consider margin of victory for FCS games.
+
+I did not consider recent games as more important than early season games in my ranking system.
+
+## Rankings vs AP top 25 (Week 11)
+
+```{r}
+#| warning: false
+#| message: false
+
+
+# Find each teams overall record
+home_record <- college_games %>%
+  group_by(Home_Team) %>%
+  mutate(wins = ifelse(Home_Team_Win == 1, 1, 0),
+         losses = ifelse(Home_Team_Win == 1, 0, 1)) %>%
+  summarize(wins = sum(wins),
+            losses = sum(losses)) %>%
+  rename(Team = Home_Team)
+
+away_record <- college_games %>%
+  group_by(Away_Team) %>%
+  mutate(wins = ifelse(Home_Team_Win == 1, 0, 1),
+         losses = ifelse(Home_Team_Win == 1, 1, 0)) %>%
+  summarize(wins = sum(wins),
+            losses = sum(losses)) %>%
+  rename(Team = Away_Team)
+
+team_record <- bind_rows(home_record, away_record) %>%
+  group_by(Team) %>%
+  summarize(Wins = sum(wins),
+            Losses = sum(losses),
+            win_pct = Wins / (Wins + Losses))
+
+
+# Create variables for winner, loser, and the losing team win percentage
+college_games <- college_games %>%
+  mutate(winner = ifelse(Home_Team_Win == 1, Home_Team, Away_Team),
+         loser = ifelse(Home_Team_Win == 1, Away_Team, Home_Team)) %>%
+  left_join(team_record %>% select(Team, win_pct), by = c("loser" = "Team")) %>%
+  rename(opp_win_pct = win_pct)
+  
+# create and use the variables for a win, MOV, the losing teams current record, and the losing teams rank (the points a team gets for winning)
+win_points <- college_games %>%
+  mutate(MOV = ifelse(Away_Team_Conference != "FCS", 
+                ifelse(Home_Team_Margin_of_Victory <= 30, abs(Home_Team_Margin_of_Victory), 30), 0),
+         win_points = 1 + ((MOV / 30) * 0.4),
+         opponent_rank = as.numeric(ifelse(Home_Team_Win == 1, Away_Team_Rank, Home_Team_Rank)),
+         opp_record_points = round(opp_win_pct * 0.6, 2),
+         rank_points = ifelse(!is.na(opponent_rank), (26 - opponent_rank) / 25 * 0.85, 0),
+         total_win_points = win_points + rank_points + opp_record_points) %>%
+  group_by(winner) %>%
+  summarize(overall_win_points = sum(total_win_points)) %>%
+  arrange(desc(overall_win_points)) %>%
+  mutate(Team = winner)
+  
+# Give points if a team lost to a ranked team
+loss_points <- college_games %>%
+  mutate(winner_rank = as.numeric(ifelse(Home_Team_Win == 1, Home_Team_Rank, Away_Team_Rank)),
+         rank_loss_points = ifelse(!is.na(winner_rank), (26 - winner_rank) / 25 * 1.2, 0)) %>%
+  group_by(loser) %>%
+  summarize(overall_loss_points = sum(rank_loss_points)) %>%
+  arrange(desc(overall_loss_points)) %>%
+  mutate(Team = loser)
+
+# combine and sort the overall points each team got
+rankings <- left_join(win_points, loss_points, by = "Team") %>%
+  mutate(overall_loss_points = ifelse(is.na(overall_loss_points), 0, overall_loss_points),
+         overall_points = overall_win_points + overall_loss_points) %>%
+  arrange(desc(overall_points)) %>%
+  mutate(Rank = row_number()) %>%
+  select(Rank, Team, overall_points)
+  
+rankings %>%
+  head(n=25) %>%
+  kable()
+
+include_graphics("top_rank.jpeg")
+```
+
+## Notable Results
+
+* Underrated: North Texas  ranked 30 jumped to 15 in my rankings
+
+* Overrated: Miami  ranked 18 dropped to 28 in my rankings
+
+When comparing my rankings to the AP poll, Oregon, Georgia, BYU, and Notre Dame dropped a noticeable amount of spots but all stayed in the top 25
+
+## Predict Week 11 games
+
+```{r}
+#| message: false
+
+library(kableExtra)
+
+home_team <- c("Purdue", "Penn State", "Missouri", "Alabama", "Miss State", "Ole Miss", "Texas Tech", "Notre Dame", "Virginia", "Louisville", "Vanderbilt", "Miami", "USC", "Memphis", "Wisconsin", "Iowa", "South Florida")
+away_team <- c("Ohio State", "Indiana", "Texas A&M", "LSU", "Georgia", "The Citadel", "BYU", "Navy", "Wake Forest", "California", "Auburn", "Syracuse", "Northwestern", "Tulane", "Washington", "Oregon", "UTSA")
+predicted_winner <- c("Ohio State", "Indiana", "Texas A&M", "Alabama", "Georgia", "Ole Miss", "Texas Tech", "Notre Dame", "Virginia", "Louisville", "Vanderbilt", "Miami", "USC", "Memphis", "Washington", "Oregon", "South Florida")
+actual_outcome <- c("Ohio State", "Indiana", "Texas A&M", "Alabama", "Georgia", "Ole Miss", "Texas Tech", "Notre Dame", "Wake Forest", "California", "Vanderbilt", "Miami", "USC", "Tulane", "Wisconsin", "Oregon", "South Florida")
+df <- data.frame(home_team, away_team, predicted_winner, actual_outcome)
+
+colnames(df) <- c("Home Team", "Away Team", "Predicted Winner", "Actual Winner")
+
+colors <- c(
+  "lightgreen", "lightgreen", "lightgreen", "lightgreen",
+  "lightgreen", "lightgreen", "lightgreen", "lightgreen",
+  "salmon", "salmon", "lightgreen", "lightgreen",
+  "lightgreen", "salmon", "salmon", "lightgreen", "lightgreen"
+)
+
+df %>%
+  kable() %>%
+  kable_paper("striped") %>%
+  column_spec(4, background = colors)
+```
+
