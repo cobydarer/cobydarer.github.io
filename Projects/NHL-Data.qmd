@@ -1,8 +1,5 @@
 ---
 title: "Analyzing NHL Data from 2007-2008 to 2018-2019"
-format: 
-  html:
-    theme: cosmo  # zephyr pulse, sketchy, default, cosmo, vapor etc
 author:
   - name: Coby Darer
     email: darerjf@appstate.edu
