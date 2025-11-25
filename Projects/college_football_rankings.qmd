@@ -47,9 +47,9 @@ If you lose
 
 ## Margin of Victory and Recent Games
 
-I considered margin of victory in my rankings system because I think being able to beat a team by a lot of points shows you are a better team than if majority of the games played are close. I used margin of victory to increase the amount of points a team gets for winning a game, capping margin of victory at 30. Winning by 30 and by 50 is the same for example. Also I did not consider margin of victory for FCS games.
+I considered margin of victory in my rankings system because being able to beat a team by a large margin demonstrates that a team is better than if the majority of games they play are close. For my ranking system, I assigned teams extra points depending on their margin of victory. I capped the points assigned for margin of victory at 30. Winning by 30 and by 50 is the same amount of extra points, for example. Also I did not consider margin of victory for FCS games.
 
-I did not consider recent games as more important than early season games in my ranking system.
+I gave equal weight to all games in my ranking system regardless of when the game was played.
 
 ## Rankings vs AP top 25 (Week 11)
 
@@ -120,22 +120,29 @@ rankings <- left_join(win_points, loss_points, by = "Team") %>%
   mutate(Rank = row_number()) %>%
   select(Rank, Team, overall_points)
   
+colnames(rankings) <- c("Rank", "Team", "Points in my System")
+
 rankings %>%
   head(n=25) %>%
   kable()
+```
 
+### Actual Ap Rankings
+```{r}
 include_graphics("top_rank.jpeg")
 ```
 
 ## Notable Results
 
-* Underrated: North Texas  ranked 30 jumped to 15 in my rankings
+* Underrated: North Texas was ranked 30 in the AP poll and jumped to 15 in my rankings
 
-* Overrated: Miami  ranked 18 dropped to 28 in my rankings
+* Overrated: Miami was ranked 18 in the AP poll and dropped to 28 in my rankings
 
 When comparing my rankings to the AP poll, Oregon, Georgia, BYU, and Notre Dame dropped a noticeable amount of spots but all stayed in the top 25
 
-## Predict Week 11 games
+## Prediction for Week 11 Games Based on my Rankings
+
+I chose seventeen games with teams ranked in the AP top 25 poll or ranked in the top 25 of my poll. I predicted the winner of each game based on which team ranked higher in my system. My ranking system accurately predicted the winner `r round(13/17, 4)*100`% of the time.
 
 ```{r}
 #| message: false

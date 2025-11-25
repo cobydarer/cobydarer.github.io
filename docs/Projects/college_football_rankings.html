@@ -163,9 +163,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#ranking-system" id="toc-ranking-system" class="nav-link" data-scroll-target="#ranking-system">Ranking System</a></li>
   <li><a href="#margin-of-victory-and-recent-games" id="toc-margin-of-victory-and-recent-games" class="nav-link" data-scroll-target="#margin-of-victory-and-recent-games">Margin of Victory and Recent Games</a></li>
-  <li><a href="#rankings-vs-ap-top-25-week-11" id="toc-rankings-vs-ap-top-25-week-11" class="nav-link" data-scroll-target="#rankings-vs-ap-top-25-week-11">Rankings vs AP top 25 (Week 11)</a></li>
+  <li><a href="#rankings-vs-ap-top-25-week-11" id="toc-rankings-vs-ap-top-25-week-11" class="nav-link" data-scroll-target="#rankings-vs-ap-top-25-week-11">Rankings vs AP top 25 (Week 11)</a>
+  <ul class="collapse">
+  <li><a href="#actual-ap-rankings" id="toc-actual-ap-rankings" class="nav-link" data-scroll-target="#actual-ap-rankings">Actual Ap Rankings</a></li>
+  </ul></li>
   <li><a href="#notable-results" id="toc-notable-results" class="nav-link" data-scroll-target="#notable-results">Notable Results</a></li>
-  <li><a href="#predict-week-11-games" id="toc-predict-week-11-games" class="nav-link" data-scroll-target="#predict-week-11-games">Predict Week 11 games</a></li>
+  <li><a href="#prediction-for-week-11-games-based-on-my-rankings" id="toc-prediction-for-week-11-games-based-on-my-rankings" class="nav-link" data-scroll-target="#prediction-for-week-11-games-based-on-my-rankings">Prediction for Week 11 Games Based on my Rankings</a></li>
   </ul>
 </nav>
     </div>
@@ -237,8 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="margin-of-victory-and-recent-games" class="level2">
 <h2 class="anchored" data-anchor-id="margin-of-victory-and-recent-games">Margin of Victory and Recent Games</h2>
-<p>I considered margin of victory in my rankings system because I think being able to beat a team by a lot of points shows you are a better team than if majority of the games played are close. I used margin of victory to increase the amount of points a team gets for winning a game, capping margin of victory at 30. Winning by 30 and by 50 is the same for example. Also I did not consider margin of victory for FCS games.</p>
-<p>I did not consider recent games as more important than early season games in my ranking system.</p>
+<p>I considered margin of victory in my rankings system because being able to beat a team by a large margin demonstrates that a team is better than if the majority of games they play are close. For my ranking system, I assigned teams extra points depending on their margin of victory. I capped the points assigned for margin of victory at 30. Winning by 30 and by 50 is the same amount of extra points, for example. Also I did not consider margin of victory for FCS games.</p>
+<p>I gave equal weight to all games in my ranking system regardless of when the game was played.</p>
 </section>
 <section id="rankings-vs-ap-top-25-week-11" class="level2">
 <h2 class="anchored" data-anchor-id="rankings-vs-ap-top-25-week-11">Rankings vs AP top 25 (Week 11)</h2>
@@ -307,9 +310,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Rank =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Rank, Team, overall_points)</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>rankings <span class="sc">%&gt;%</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(rankings) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rank"</span>, <span class="st">"Team"</span>, <span class="st">"Points in my System"</span>)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>rankings <span class="sc">%&gt;%</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -317,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="header">
 <th style="text-align: right;">Rank</th>
 <th style="text-align: left;">Team</th>
-<th style="text-align: right;">overall_points</th>
+<th style="text-align: right;">Points in my System</th>
 </tr>
 </thead>
 <tbody>
@@ -449,6 +454,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
+</div>
+<section id="actual-ap-rankings" class="level3">
+<h3 class="anchored" data-anchor-id="actual-ap-rankings">Actual Ap Rankings</h3>
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">"top_rank.jpeg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -462,16 +471,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
 <section id="notable-results" class="level2">
 <h2 class="anchored" data-anchor-id="notable-results">Notable Results</h2>
 <ul>
-<li><p>Underrated: North Texas ranked 30 jumped to 15 in my rankings</p></li>
-<li><p>Overrated: Miami ranked 18 dropped to 28 in my rankings</p></li>
+<li><p>Underrated: North Texas was ranked 30 in the AP poll and jumped to 15 in my rankings</p></li>
+<li><p>Overrated: Miami was ranked 18 in the AP poll and dropped to 28 in my rankings</p></li>
 </ul>
 <p>When comparing my rankings to the AP poll, Oregon, Georgia, BYU, and Notre Dame dropped a noticeable amount of spots but all stayed in the top 25</p>
 </section>
-<section id="predict-week-11-games" class="level2">
-<h2 class="anchored" data-anchor-id="predict-week-11-games">Predict Week 11 games</h2>
+<section id="prediction-for-week-11-games-based-on-my-rankings" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-for-week-11-games-based-on-my-rankings">Prediction for Week 11 Games Based on my Rankings</h2>
+<p>I chose seventeen games with teams ranked in the AP top 25 poll or ranked in the top 25 of my poll. I predicted the winner of each game based on which team ranked higher in my system. My ranking system accurately predicted the winner 76.47% of the time.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
