@@ -18,7 +18,6 @@ website:
         href: https://www.linkedin.com/in/jacob-coby-darer-48318a378/
       - icon: github
         href: https://github.com/cobydarer
-
 format:
   html:
     theme: zephyr  # flatly, litera, lumen, lux, minty, pulse, sandstone, zephyr, quartz, yeti, cosmo, sketchy
