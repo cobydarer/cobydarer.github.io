@@ -133,8 +133,8 @@
     "text": "library(dplyr)\nlibrary(hockeyR)\nlibrary(ggplot2)\nlibrary(knitr)\nlibrary(cowplot)\nlibrary(sportyR)\npbp_24 &lt;- load_pbp(\"2023-2024\")"
   },
   {
-    "objectID": "Projects/NHL_Long_Change.html#loading-the-necessary-packages",
-    "href": "Projects/NHL_Long_Change.html#loading-the-necessary-packages",
+    "objectID": "Projects/NHL_Long_Change.html#loading-the-necessary-packages-and-data",
+    "href": "Projects/NHL_Long_Change.html#loading-the-necessary-packages-and-data",
     "title": "Analyzing NHL play-by-play data from the 2023-2024 season",
     "section": "",
     "text": "library(dplyr)\nlibrary(hockeyR)\nlibrary(ggplot2)\nlibrary(knitr)\nlibrary(cowplot)\nlibrary(sportyR)\npbp_24 &lt;- load_pbp(\"2023-2024\")"
@@ -194,12 +194,5 @@
     "title": "Analyzing NHL play-by-play data from the 2023-2024 season",
     "section": "Conclusion",
     "text": "Conclusion\nThe long change in the second period seems to affect the amount of stoppages and the amount of penalties taken. Most of the time stoppages allow teams to change without risk so it would make sense that teams want more stoppages to avoid the long change in the second. Taking more penalties could indicate that players are getting more fatigued because of the more difficult change in the second. However, some other plays that could be affected by how tired a player is seem to be more closely related to overall game fatigue and not the harder change in the second period."
-  },
-  {
-    "objectID": "Projects/NHL_Long_Change.html#loading-the-necessary-packages-and-data",
-    "href": "Projects/NHL_Long_Change.html#loading-the-necessary-packages-and-data",
-    "title": "Analyzing NHL play-by-play data from the 2023-2024 season",
-    "section": "",
-    "text": "library(dplyr)\nlibrary(hockeyR)\nlibrary(ggplot2)\nlibrary(knitr)\nlibrary(cowplot)\nlibrary(sportyR)\npbp_24 &lt;- load_pbp(\"2023-2024\")"
   }
 ]
