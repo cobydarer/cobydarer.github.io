@@ -15,7 +15,7 @@ Appalachian State University
 Explore this webpage to learn more about me and what data analytics project I have completed.
 
 
-<div style="position: relative; left: 15px;">
+<div style="position: relative; left: 10px;">
 <img src="./Pics/Headshot.jpeg" width="350">
 </div>
 
