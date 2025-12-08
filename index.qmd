@@ -14,4 +14,4 @@ Appalachian State University
 
 Explore this webpage to learn more about me and what data analytics project I have completed.
 
-![](./Pics/headshot.jpeg){width="300"}
+![](./Pics/headshot.jpeg){width="320"}
