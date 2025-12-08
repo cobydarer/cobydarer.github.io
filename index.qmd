@@ -16,6 +16,6 @@ Explore this webpage to learn more about me and what data analytics project I ha
 
 
 <div style="position: relative; left: 2px;">
-<img src="./Pics/Headshot.jpeg" width="300">
+<img src="./Pics/Headshot.jpeg" width="320">
 </div>
 
