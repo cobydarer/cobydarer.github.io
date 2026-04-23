@@ -223,7 +223,7 @@ ggplot(pbp_24_distance, aes(x = factor(period), y = shot_distance, fill = factor
   theme_bw() +
   labs(fill = "Period",
        x = "Period",
-       y = "Shot Distance")
+       y = "Shot Distance (feet)")
 
 pbp_24_distance %>%
   group_by(period) %>%
