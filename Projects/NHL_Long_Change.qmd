@@ -95,7 +95,7 @@ pbp_24_cover %>%
   kable()
 ```
 
-Overall there are more stoppages in the second period than there are in the first and third. Looking specifically at icings there is the most in the third and the least in the second. The second period had the most amount of puck covers out of any period. 
+Overall there are more stoppages in the second period than there are in the first and third. Looking specifically at icings there is the most in the third and the least in the first. The second period had the most amount of puck covers out of any period. 
 
 **Note:** The third period is when teams pull their goalie and so the amount of icings and times the puck was covered could be skewed a little by this. However, overall the second period still has the most amount of stoppages and the second period has more than the first in both icings and puck covers.
 
