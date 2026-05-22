@@ -5,7 +5,7 @@ format:
     code-fold: true
 author:
   - name: Coby Darer
-    email: darerjf@appstate.edu
+    email: cobydarer@gmail.com
     affiliation:
       - name: Appalachian State University
         city: Boone
