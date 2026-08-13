@@ -13,7 +13,7 @@ website:
       - project.qmd
       - href: skills.qmd
         text: Technical Skills
-      - href: Resume2.pdf
+      - href: Resume.pdf
         text: Resume
     
     tools:
