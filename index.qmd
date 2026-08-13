@@ -2,20 +2,11 @@
 title: 'Jacob "Coby" Darer'
 ---
 
-Appalachian State University
+I'm a Master's student in Business Analytics at Wake Forest University with a background in mathematics, statistics, and sports analytics. My interests include data analysis, predictive modeling, and using data to support decision-making in sports and business.
+  
+As a hockey player, rock climber, and lifelong sports fan, I am excited to combine my strong math skills with my passion for sports. As a current employee of the Durham Bulls Baseball Club and through my past internships with the App State baseball team and Prep Baseball Report, I am strengthening and expanding my skills in data collection and analysis through real world experience.
 
-- Bachelor of Science, 2026
+Explore this website to learn more about me, my experience, and my data analytics projects.
 
-- **Major**: General mathematics
-
-- **Minor**: Statistics
-
-- **Other**: Sports analytics certificate
-
-Explore this webpage to learn more about me and what data analytics project I have completed.
-
-
-<div style="position: relative; left: 4px;">
-<img src="./Pics/Headshot.jpeg" width="320">
-</div>
+![](./Pics/Headshot.jpeg){width="320"}
 

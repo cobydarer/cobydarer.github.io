@@ -8,10 +8,13 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - education.qmd
+      - experience.qmd
+      - project.qmd
+      - href: skills.qmd
+        text: Technical Skills
       - href: Resume2.pdf
         text: Resume
-      - about.qmd
-      - project.qmd
     
     tools:
       - icon: linkedin

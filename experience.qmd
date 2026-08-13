@@ -1,0 +1,105 @@
+---
+title: "Experience"
+format: html
+---
+
+<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
+
+<div style="min-width: 250px;">
+
+**March - September 2026**
+
+</div>
+
+<div>
+
+**Technology Operator**  
+Durham Bulls, Tampa Bay Rays AAA Affiliate  
+<span style="font-size: 0.9em;">Durham, NC</span>
+
+<div style="margin-top: 8px;">
+
+- Managed real-time Trackman player-tracking data during games, auditing pitch, batted-ball, and fielding metrics to guarantee perfect data integrity for coaching staff.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
+
+<div style="min-width: 250px;">
+
+**May – July 2025**
+
+</div>
+
+<div>
+
+**Internship**  
+Prep Baseball Report  
+<span style="font-size: 0.9em;">Kansas City, KS</span>
+
+<div style="margin-top: 8px;">
+
+- Produced real-time Trackman tracking technology across various youth tournaments throughout the summer to deliver precise performance reports to scouting staff.
+
+- Collaborated with Prep Baseball scouts to capture high-definition game footage, producing player highlights that boosted prospect visibility for collegiate and professional recruiters.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
+
+<div style="min-width: 250px;">
+
+**February 2025 – May 2026**
+
+</div>
+
+<div>
+
+**Internship**  
+Appalachian State University Baseball Team 
+<span style="font-size: 0.9em;">Boone, NC</span>
+
+<div style="margin-top: 8px;">
+
+- Analyzed practice and game data points for ASU Division I baseball using R and Trackman, building statistical reports that optimized coaching strategy and player performance.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
+
+<div style="min-width: 250px;">
+
+**September 2023 – May 2026**
+
+</div>
+
+<div>
+
+**Climbing Wall Operator**  
+Appalachian State University  
+<span style="font-size: 0.9em;">Boone, NC</span>
+
+<div style="margin-top: 8px;">
+
+- Supervised daily operations and safety protocols for a climbing facility, conducting wall inspections, managing gear inventory, and instructing climbers on risk management to ensure an injury-free environment.
+
+</div>
+
+</div>
+
+</div>

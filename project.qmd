@@ -3,5 +3,17 @@ title: "Projects"
 ---
 
 * [Analyzing 5v5 Scoring Trends in the NHL, 2007-2019](./Projects/NHL-Data.qmd)
+
+Analyzed NHL data from 2007 to 2019 in order to analyze scoring trends over that time frame. Utilized R to create visualizations to better understand and identify different patterns and trends over this ten-year span. 
+
+<br>
+
 * [Ranking College Football Teams, 2025](./Projects/college_football_rankings.qmd)
+
+Applied game data from the first eleven weeks of the 2025 football season and a points system to rank college football teams. Developed predictions for the following week based on team rankings and then compared predictions to the actual result.
+
+<br>
+
 * [Analyzing the Long Change in the NHL, 2023-2024](./Projects/NHL_Long_Change.qmd)
+
+Used data from the 2023-2024 NHL season to explore the impact of the long change in the second period on various hockey metrics. Utilized various visualizations to make comparisons and draw conclusions about the overall impact of the long change.
