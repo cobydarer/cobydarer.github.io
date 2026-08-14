@@ -5,7 +5,7 @@ format: html
 
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="width: 150px;">
+<div style="min-width: 150px;">
 
 ![](./Pics/Python-logo-notext.svg.webp){width="100"}
 
