@@ -15,6 +15,7 @@ website:
         text: Technical Skills
       - href: Resume.pdf
         text: Resume
+        target: _blank
     
     tools:
       - icon: linkedin

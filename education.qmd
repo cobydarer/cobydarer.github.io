@@ -15,7 +15,7 @@ format: html
 
 <div>
 
-[<span style="font-size: 25px;">Wake Forest University</span>](https://business.wfu.edu/masters-in-business-analytics/) 
+[<span style="font-size: 25px;">Wake Forest University</span>](https://business.wfu.edu/masters-in-business-analytics/){target="_blank"} 
 
 - Masters of Science, 2027
 - Business Analytics
@@ -36,7 +36,7 @@ format: html
 
 <div>
 
-[<span style="font-size: 25px;">Appalachian State University</span>](https://cas.appstate.edu/)
+[<span style="font-size: 25px;">Appalachian State University</span>](https://cas.appstate.edu/){target="_blank"}
 
 - Bachelor of Science, 2026
 - **Major**: General mathematics
