@@ -5,7 +5,7 @@ format: html
 
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="min-width: 250px;">
+<div style="width: 150px;">
 
 ![](./Pics/Python-logo-notext.svg.webp){width="100"}
 
@@ -23,7 +23,7 @@ Programming language used for data analysis, automation, and application develop
  
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="min-width: 250px;">
+<div style="min-width: 150px;">
 
 ![](./Pics/R_logo.webp){width="100"}
 
@@ -41,7 +41,7 @@ Programming language used for statistical analysis, data visualization, and mode
 
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="min-width: 250px;">
+<div style="min-width: 150px;">
 
 ![](./Pics/sql-logo.png){width="150"}
 
@@ -60,11 +60,11 @@ Language used for querying, managing, and analyzing relational databases.
 
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="min-width: 250px;">
+<div style="min-width: 150px;">
 
 ![](./Pics/Trackman_logo.webp){width="150"}
 
-<span style="font-size: 9px; color: gray;">TRACKMAN® and the Tracer Logo are registered trademarks of Trackman A/S</span>
+
 
 </div>
 
@@ -80,7 +80,7 @@ Sports analytics and player-tracking technology used to collect and analyze base
 
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
 
-<div style="min-width: 250px;">
+<div style="min-width: 150px;">
 
 ![](./Pics/excel_logo.jpg){width="150"}
 

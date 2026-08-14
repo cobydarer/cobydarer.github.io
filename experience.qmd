@@ -3,15 +3,11 @@ title: "Experience"
 format: html
 ---
 
-<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
-
-<div style="min-width: 250px;">
+<div style="margin-bottom: 35px;">
 
 **March - September 2026**
 
-</div>
-
-<div>
+<div style="margin-left: 30px; margin-top: 8px;">
 
 **Technology Operator**  
 Durham Bulls, Tampa Bay Rays AAA Affiliate  
@@ -28,15 +24,11 @@ Durham Bulls, Tampa Bay Rays AAA Affiliate
 </div>
 
 
-<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
-
-<div style="min-width: 250px;">
+<div style="margin-bottom: 35px;">
 
 **May – July 2025**
 
-</div>
-
-<div>
+<div style="margin-left: 30px; margin-top: 8px;">
 
 **Internship**  
 Prep Baseball Report  
@@ -55,18 +47,14 @@ Prep Baseball Report
 </div>
 
 
-<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
-
-<div style="min-width: 250px;">
+<div style="margin-bottom: 35px;">
 
 **February 2025 – May 2026**
 
-</div>
-
-<div>
+<div style="margin-left: 30px; margin-top: 8px;">
 
 **Internship**  
-Appalachian State University Baseball Team 
+Appalachian State University Baseball Team  
 <span style="font-size: 0.9em;">Boone, NC</span>
 
 <div style="margin-top: 8px;">
@@ -80,15 +68,11 @@ Appalachian State University Baseball Team
 </div>
 
 
-<div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 35px;">
-
-<div style="min-width: 250px;">
+<div style="margin-bottom: 35px;">
 
 **September 2023 – May 2026**
 
-</div>
-
-<div>
+<div style="margin-left: 30px; margin-top: 8px;">
 
 **Climbing Wall Operator**  
 Appalachian State University  
