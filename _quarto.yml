@@ -20,8 +20,10 @@ website:
     tools:
       - icon: linkedin
         href: https://www.linkedin.com/in/cobydarer
+        target: _blank
       - icon: github
         href: https://github.com/cobydarer
+        target: _blank
         
 format:
   html:
