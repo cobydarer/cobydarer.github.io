@@ -10,6 +10,9 @@ Explore this website to learn more about me, my experience, and my data analytic
 
 ![](./Pics/Headshot.jpeg){width="320"} 
 
-<video controls style="width: 500px; height: auto;">
-  <source src="./Professional_pitch.mp4" type="video/mp4">
-</video>
+```{r}
+#| include: false
+#<video controls style="width: 500px; height: auto;">
+#  <source src="./Professional_pitch.mp4" type="video/mp4">
+#</video>
+```
