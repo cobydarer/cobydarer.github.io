@@ -5,7 +5,7 @@ format: html
 
 <div style="margin-bottom: 35px;">
 
-**March - September 2026**
+**March 2026 - September 2026**
 
 <div style="margin-left: 30px; margin-top: 8px;">
 
@@ -26,7 +26,7 @@ Durham Bulls, Tampa Bay Rays AAA Affiliate
 
 <div style="margin-bottom: 35px;">
 
-**May – July 2025**
+**May 2025 – July 2025**
 
 <div style="margin-left: 30px; margin-top: 8px;">
 
