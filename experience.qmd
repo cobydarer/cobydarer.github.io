@@ -5,6 +5,50 @@ format: html
 
 <div style="margin-bottom: 35px;">
 
+**October 2026 – Present**
+
+<div style="margin-left: 30px; margin-top: 8px;">
+
+**Sports Analytics Practicum**  
+Wake Forest Football Team  
+<span style="font-size: 0.9em;">Durham, NC</span>
+
+<div style="margin-top: 8px;">
+
+- Working with a small team to complete requested analytics projects from the team
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="margin-bottom: 35px;">
+
+**August 2026 – Present**
+
+<div style="margin-left: 30px; margin-top: 8px;">
+
+**Analytics Team Member**  
+Wake Forest University Baseball Team  
+<span style="font-size: 0.9em;">Durham, NC</span>
+
+<div style="margin-top: 8px;">
+
+- Managing real-time Trackman and KinaTrax player-tracking data during games and practices, auditing pitch, batted-ball, and fielding metrics to guarantee perfect data integrity for coaching staff.
+
+- Building a model to predict how far batted balls travel based on launch conditions and other potential variables.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="margin-bottom: 35px;">
+
 **March 2026 - September 2026**
 
 <div style="margin-left: 30px; margin-top: 8px;">
