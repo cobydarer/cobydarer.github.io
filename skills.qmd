@@ -21,7 +21,7 @@ Programming language used for data analysis, automation, and application develop
 </div>
 
 
-<div style="display: flex; align-items: center; gap: 30px; margin-bottom: 35px;">
+<div style="display: flex; align-items: center; gap: 30px; margin-bottom: 30px;">
 
 <div style="flex: 0 0 150px; display: flex; justify-content: center;">
 
@@ -57,18 +57,18 @@ Query language used to retrieve, organize, and analyze data stored in relational
 </div>
 
 
-<div style="display: flex; align-items: center; gap: 30px; margin-bottom: 35px;">
+<div style="display: flex; align-items: center; gap: 30px; margin-bottom: 20px;">
 
 <div style="flex: 0 0 150px; display: flex; justify-content: center;">
 
-![](./Pics/Trackman_logo.webp){width="140"}
+![](./Pics/Tableau_Logo.png){width="160"}
 
 </div>
 
 <div>
 
-**Trackman**  
-Sports analytics and player-tracking technology used to collect and analyze baseball performance data.
+**Tableau**  
+Data visualization software used to build interactive dashboards and communicate insights from data.
 
 </div>
 
@@ -91,3 +91,22 @@ Spreadsheet software used for data analysis, statistical modeling, and visualiza
 </div>
 
 </div>
+
+
+<div style="display: flex; align-items: center; gap: 30px; margin-bottom: 35px;">
+
+<div style="flex: 0 0 150px; display: flex; justify-content: center;">
+
+![](./Pics/Trackman_logo.webp){width="140"}
+
+</div>
+
+<div>
+
+**Trackman**  
+Sports analytics and player-tracking technology used to collect and analyze baseball performance data.
+
+</div>
+
+</div>
+
